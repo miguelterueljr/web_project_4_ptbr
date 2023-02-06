@@ -1,0 +1,9 @@
+/*importação normalize*/
+@import url(../vendor/normalize.css);
+
+/*importação de fontes*/
+@import url(../fonts/Inter-Web/inter.css);
+
+/*importação root e page - blocos baiscos do meu html*/
+@import url(../blocks/root/root.css);
+@import url(../blocks/page/page.css);
