@@ -7,3 +7,6 @@
 /*importação root e page - blocos baiscos do meu html*/
 @import url(../blocks/root/root.css);
 @import url(../blocks/page/page.css);
+
+/*bloco header*/
+@import url(../blocks/header/header.css);

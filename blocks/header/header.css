@@ -1,0 +1,9 @@
+.header {
+  border-bottom: 1px solid #545454;
+  width: 68.75%;
+  margin-top: 45px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 41px;
+}
