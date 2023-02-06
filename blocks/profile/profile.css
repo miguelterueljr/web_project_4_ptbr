@@ -1,0 +1,9 @@
+.profile {
+  margin-top: 36.25px;
+  border: 1px solid yellow;
+  width: 68.75%;
+  display: flex;
+  justify-content: space-between; 
+}
+
+
