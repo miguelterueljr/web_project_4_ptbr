@@ -3,6 +3,7 @@
   width: 68.75%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   column-gap: 17px;
   row-gap: 20px;
   

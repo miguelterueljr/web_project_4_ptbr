@@ -7,3 +7,10 @@
   display: block;
   
 }
+
+@media screen and (min-width: 320px) and (max-width: 600px) {
+  .profile__about {
+    font-size: 0.875rem; /*14px*/
+    
+  }
+}

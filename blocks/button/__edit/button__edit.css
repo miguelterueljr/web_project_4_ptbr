@@ -4,3 +4,11 @@
   align-self: center;
   
 }
+
+@media screen and (min-width: 320px) and (max-width: 600px) {
+  .button__edit {
+    width: 18px;
+    height: 18px;
+    
+  }
+}

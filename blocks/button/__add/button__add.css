@@ -3,3 +3,9 @@
   height: 50px;
   align-self: center;
 }
+
+@media screen and (min-width: 320px) and (max-width: 600px) {
+  .button__add {
+    width: 282px;
+  }
+}
