@@ -25,3 +25,11 @@
 @import url(../blocks/button/__edit/button__edit.css);
 @import url(../blocks/button/__add/button__add.css);
 
+/*bloco elements e element*/
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/__text/element__text.css);
+@import url(../blocks/element/__title/element__title.css);
+@import url(../blocks/element/__button/element__button.css);
+
