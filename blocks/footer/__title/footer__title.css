@@ -1,0 +1,7 @@
+.footer__title {
+  color: #545454;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 1.125rem; /*18px*/
+  line-height: 1.361rem;
+}
