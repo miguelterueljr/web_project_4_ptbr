@@ -1,0 +1,7 @@
+.modal__button-close {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  align-self: flex-end;
+  border: none;
+}

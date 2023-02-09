@@ -9,27 +9,18 @@
 </head>
 <body class="root">
 
-
-  
-  
-  <div class="overlay">
-    <div class="modal">
-      <button class="modal__button_close"><img src="./images/close-icon.png" alt="Icone em formato de fechar com um simbolo de X"></button>
-
-      <div class="modal__container">
-        <h2 class="modal__title">Editar Perfil</h2>
-
-        <form class="modal__form">
-          <input type="text" class="modal__input modal__input_name" placeholder="Jacques Costeau">
-          <input type="text" class="modal__input modal__input_job" placeholder="Explorar">
-        </form>
-        <button class="modal__button_save">Salvar</button>
-      </div>
-
-
-
+  <div class="modal">
+    <button class="modal__button-close"><img src="./images/close-icon.png" alt="Icone em formato de fechar com um simbolo de X"></button>
+    <div class="modal__container">
+      <h2 class="modal__title">Editar Perfil</h2>
+      <form class="modal__form">
+        <input type="text" class="modal__input modal__input_name" placeholder="Jacques Costeau">
+        <input type="text" class="modal__input modal__input_job" placeholder="Explorar">
+      </form>
+      <button class="modal__button-save" type="submit">Salvar</button>
     </div>
   </div>
+  
   
   <main class="page">
     <section class="header">
@@ -45,12 +36,12 @@
         <div class="profile__info">
           <div class="profile__title">
             <h1 class="profile__name">Jacques Costeau</h1>
-            <button class="button button__edit"><img src="./images/button-edit.png" alt="Simbolo de um botão de editar"></button>
+            <button class="button button-edit"><img src="./images/button-edit.png" alt="Simbolo de um botão de editar"></button>
           </div>
           <span class="profile__about">Explorar</span>
         </div>
       </div>
-      <button class="button button__add">
+      <button class="button button-add">
         <img src="./images/add-button.png" alt="Botão com o simbolo mais, para adicionar um card">
       </button>
     </section>
@@ -118,6 +109,8 @@
 
   </main>
 
+
+  <script src="./scripts/index.js"></script>
   
 </body>
 </html>

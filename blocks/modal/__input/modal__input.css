@@ -1,0 +1,5 @@
+.modal__input {
+  border: none;
+  border-bottom: 1px solid gray;
+  padding-bottom: 11px;
+}
