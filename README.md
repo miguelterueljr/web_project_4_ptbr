@@ -10,7 +10,7 @@ Este projeto foi criado com a finalidade de desenvolvimento de habilidades Front
 * Figma
 
 * Imagens
-![Imagem do Projeto](./images/page_preview.png.png)
+![Imagem do Projeto](./images/page_preview.png)
 
   
 
