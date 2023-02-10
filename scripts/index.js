@@ -1,21 +1,20 @@
-const editButton = document.querySelector('.button-edit'); // pego o botao de edit
-const modal = document.querySelector('.modal'); //pego o modal
-const closeButton = document.querySelector('.modal__button-close'); //pego o botao de fechar
+const editButton = document.querySelector('.button-edit'); 
+const modal = document.querySelector('.modal'); 
+const closeButton = document.querySelector('.modal__button-close'); 
 const saveButton = document.querySelector('.modal__button-save');
 const makePageBlur = document.querySelector('.page')
 
-//Função para fazer a pagina ficar opaca quando o modal for aberto, aqui usei o metodo toggle que adiciona uma classe se nao tiver ela, e remove se ja tiver, para evitar ter que criar uma função para adicionar a classe e mais uma função para remover a classe.
+//Função para fazer a pagina ficar opaca quando o modal for aberto.
 function togglePageOpacity () {
   makePageBlur.classList.toggle('page_opacity');
 }
 
-/*Funcao para adicior ou remover o modal, mesmo raciocionio do toggle acima*/
+/*Funcao para adicior ou remover o modal*/
 function toggleModal() {
   togglePageOpacity();
   modal.classList.toggle('modal_opened')
 }
 
-/*Escutadores de evento ao clicar botao edit e ao clicar no botao de fechar*/
 editButton.addEventListener('click', toggleModal);
 closeButton.addEventListener('click', toggleModal);
 
@@ -42,7 +41,7 @@ function handleProfileFormSubmit(evt) {
   nameField.textContent = addName;
   jobField.textContent = addJob;
 
-  /*chamo funcao para ao clicar no botao salvar fechar o formulario;*/
+  
   toggleModal();
 
 }

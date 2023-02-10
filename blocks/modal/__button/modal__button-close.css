@@ -5,3 +5,8 @@
   align-self: flex-end;
   border: none;
 }
+
+.modal__button-close:hover {
+  opacity: .6;
+  cursor: pointer;
+}

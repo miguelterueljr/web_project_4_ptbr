@@ -2,3 +2,8 @@
   background-color: transparent;
   border: none;
 }
+
+.element__button:hover {
+  opacity: .5;
+  cursor: pointer;
+}
