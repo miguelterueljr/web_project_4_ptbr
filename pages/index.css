@@ -21,6 +21,9 @@
 /*Classe que sera inserida via JS para que o modal apareça*/
 @import url(../blocks/modal/_opened/modal_opened.css);
 
+/*bloco modal de adicionar card*/
+@import url(../blocks/modal/__button/modal__button-create.css);
+
 /*bloco header*/
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__image/header__image.css);

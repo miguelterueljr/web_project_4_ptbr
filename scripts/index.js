@@ -12,11 +12,26 @@ function togglePageOpacity () {
 /*Funcao para adicior ou remover o modal*/
 function toggleModal() {
   togglePageOpacity();
-  modal.classList.toggle('modal_opened')
+  modal.classList.toggle('modal_opened');
 }
 
 editButton.addEventListener('click', toggleModal);
 closeButton.addEventListener('click', toggleModal);
+
+/*bloco para abrir modal de adicionar card*/
+const addButton = document.querySelector('.button-add');
+const modalAdd = document.querySelector('.modal-add');
+const buttonCloseAdd = document.querySelector('.button-close')
+
+/*Funcao mostra modal do adicionar card e tira*/
+function toggleModalAdd() {
+  togglePageOpacity();
+  modalAdd.classList.toggle('modal_opened');
+}
+
+addButton.addEventListener('click', toggleModalAdd);
+buttonCloseAdd.addEventListener('click', toggleModalAdd);
+
 
 /*Bloco de código para fazer o botão salvar*/
 const formElement = document.querySelector('.modal__form');  //pego formulario
@@ -47,3 +62,31 @@ function handleProfileFormSubmit(evt) {
 }
 
 saveButton.addEventListener('click', handleProfileFormSubmit);
+
+//Array com cards Iniciais
+const initialCards = [
+  {
+    name: "Grand Kanyon",
+    link: "./images/grand-canyon.jpg"
+  },
+  {
+    name: "Dallas Airport",
+    link: "./images/dallas-airport.jpg"
+  },
+  {
+    name: "Golden Gate",
+    link: "./images/golden-gate.png"
+  },
+  {
+    name: "Miami",
+    link: "./images/miami.jpg"
+  },
+  {
+    name: "Statue of Liberty",
+    link: "./images/statue-of-liberty.jpg"
+  },
+  {
+    name: "Lake Tahoe",
+    link: "./images/tahoe-lake.webp"
+  }
+]
