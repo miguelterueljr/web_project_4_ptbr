@@ -90,3 +90,7 @@ const initialCards = [
     link: "./images/tahoe-lake.webp"
   }
 ]
+
+// fazer funcao que adciona os cards iniciais a pagina
+//tenho q criar bloco template para isso tb
+//usar forEach
