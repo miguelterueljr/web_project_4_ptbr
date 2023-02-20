@@ -35,8 +35,10 @@
     </div>
   </div>
   
-  
   <main class="page">
+
+     
+    
     <section class="header">
       <div class="header__logo">
         <img src="./images/around-the-us-logo.png" alt="Logotipo around US" class="header__image">
@@ -61,7 +63,6 @@
     </section>
 
     <section class="elements">
-      <!--Bloco card-->
       <article class="element">
         <img src="./images/grand-canyon.jpg" alt="Imagem do Grand Canyon nos EUA" class="element__image">
         <button class="element__delete"><img src="./images/delete-icon.png" alt=""></button>
@@ -70,8 +71,7 @@
           <button class="element__button"><img src="./images/like-button.svg" alt="Simbolo em formato de coração, para curtir elementos"></button>
         </div>
       </article>
-
-      <!--Bloco card-->
+<!--    
       <article class="element">
         <img src="./images/dallas-airport.jpg" alt="Foto do aeroporto de Dallas" class="element__image">
         <button class="element__delete"><img src="./images/delete-icon.png" alt=""></button>
@@ -81,7 +81,7 @@
         </div>
       </article>
 
-      <!--Bloco card-->
+      
       <article class="element">
         <img src="./images/golden-gate.png" alt="Foto golden Gate" class="element__image">
         <button class="element__delete"><img src="./images/delete-icon.png" alt=""></button>
@@ -91,7 +91,7 @@
         </div>
       </article>
       
-      <!--Bloco card-->
+      
       <article class="element">
         <img src="./images/miami.jpg" alt="Foto de Miami" class="element__image">
         <button class="element__delete"><img src="./images/delete-icon.png" alt=""></button>
@@ -101,7 +101,7 @@
         </div>
       </article>
 
-      <!--Bloco card-->
+      
       <article class="element">
         <img src="./images/statue-of-liberty.jpg" alt="Foto da estátua da liberdade" class="element__image">
         <button class="element__delete"><img src="./images/delete-icon.png" alt=""></button>
@@ -111,7 +111,7 @@
         </div>
       </article>
 
-      <!--Bloco card-->
+      
       <article class="element">
         <img src="./images/tahoe-lake.webp" alt="Foto do lago tahoe" class="element__image">
         <button class="element__delete"><img src="./images/delete-icon.png" alt=""></button>
@@ -121,7 +121,21 @@
         </div>
       </article>
 
+    
     </section>
+
+    <!--Template para o card-->
+    <!-- quando deleto os cards ta diminuindo os blocos, resolver esse erro-->
+    <template id="element">
+      <article class="element">
+        <img class="element__image">
+        <button class="element__delete"><img src="./images/delete-icon.png" alt="botão em formato de delete"></button>
+        <div class="element__text">
+          <h3 class="element__title"></h3>
+          <button class="element__button"><img src="./images/like-button.svg" alt="Símbolo de curtir no formato de coração."></button>
+        </div>
+      </article>
+    </template>
     
     <footer class="footer">
       <h4 class="footer__title">&copy; 2023 Around The U.S.</h4>

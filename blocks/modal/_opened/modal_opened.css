@@ -1,5 +1,6 @@
 .modal_opened {
   visibility: visible;
   
+  animation: fade-in 1s ease-in;
 
 }

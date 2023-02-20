@@ -1,6 +1,6 @@
 .header {
   
-  width: 68.75%;
+  min-width: 68.75%;
   margin-top: 45px;
 
   display: flex;
