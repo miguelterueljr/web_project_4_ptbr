@@ -96,6 +96,7 @@ const initialCards = [
 
 //Função adicionar Cards
 function addCard(imageLink, imageTitle) {
+  
   const elements = document.querySelector('.elements');
   const userTemplate = document.querySelector('#element').content; // variavel que pega o conteudo da id do template
   const itemElement = userTemplate.querySelector('.element').cloneNode(true); //clona todo conteudo 
@@ -107,11 +108,13 @@ function addCard(imageLink, imageTitle) {
   itemElement.querySelector('.element__button').addEventListener('click', function(evt) {
     evt.target.classList.toggle('element__button_active')
   });
-
+  
   elements.prepend(itemElement); // adiciono o conteudo dinamicamenta na pagina
-
+  
   const removeCardButton = document.querySelector('.element__delete');
   removeCardButton.addEventListener('click', removeCard);
+ 
+  openModalImage();
   
 }
 
@@ -141,3 +144,32 @@ function removeCard () {
     element.addEventListener('click', deleteACard)
   })
 }
+
+  //Função abre modal da imagem
+  function openModalImage () {
+    
+    const imagens = document.querySelectorAll('.element__image');
+    const modalImage = document.querySelector('.modal-image');
+    const modalImgElement = document.querySelector('.modal-image__image');
+    const btnClose = document.querySelector('.modal-image__button');
+    let srcVal = ''; //recebe let pq essa variavel vai receber outro valor assim que for executado o laço de repetição
+    
+    
+    imagens.forEach(function (item) {
+      item.addEventListener('click', function() {
+        srcVal = item.getAttribute('src');
+        modalImgElement.setAttribute('src', srcVal);
+        modalImage.classList.add('modal-image__active');
+        
+      })
+      
+    })
+
+    btnClose.addEventListener('click', function () {
+      modalImage.classList.remove('modal-image__active');
+      
+    });
+    
+  };
+
+  

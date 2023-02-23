@@ -1,0 +1,19 @@
+.modal-image {
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 513px;
+  height: 620px;
+  position: fixed;
+  z-index: 2;
+  gap: 10px;
+  top: 5%;
+  left: 50%;
+  /*Margin-left negativo do resultado da metade de widht, para ficar centralizado*/
+  margin-left: -245px;
+  
+}
+
+
