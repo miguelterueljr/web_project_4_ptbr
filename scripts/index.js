@@ -103,7 +103,12 @@ function addCard(imageLink, imageTitle) {
   itemElement.querySelector('.element__image').src = imageLink //o src da imagem é igual ao parametro imageLink
   itemElement.querySelector('.element__title').textContent = imageTitle 
 
-  elements.append(itemElement); // adiciono o conteudo dinamicamenta na pagina
+  //botao curtir
+  itemElement.querySelector('.element__button').addEventListener('click', function(evt) {
+    evt.target.classList.toggle('element__button_active')
+  });
+
+  elements.prepend(itemElement); // adiciono o conteudo dinamicamenta na pagina
   
 }
 
