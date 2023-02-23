@@ -8,7 +8,7 @@
 @media screen and (min-width: 320px) and (max-width: 1060px) {
   .profile__container {
     justify-content: center;
-    flex-direction: column;  
+    flex-direction: column;
     align-items: center;
   }
 }
