@@ -109,6 +109,9 @@ function addCard(imageLink, imageTitle) {
   });
 
   elements.prepend(itemElement); // adiciono o conteudo dinamicamenta na pagina
+
+  const removeCardButton = document.querySelector('.element__delete');
+  removeCardButton.addEventListener('click', removeCard);
   
 }
 
@@ -126,3 +129,15 @@ buttonCreateCard.addEventListener('click', function () {
   toggleModalAdd();
 
 })
+
+//deleta card
+function removeCard () {
+  const removeCard = document.querySelectorAll('.element__delete');
+
+  removeCard.forEach((element)=> {
+    function deleteACard(evt) {
+      evt.target.parentElement.parentElement.remove();
+    }
+    element.addEventListener('click', deleteACard)
+  })
+}
