@@ -3,6 +3,7 @@ const modal = document.querySelector('.modal');
 const closeButton = document.querySelector('.modal__button-close'); 
 const saveButton = document.querySelector('.modal__button-save');
 const makePageBlur = document.querySelector('.page')
+const buttonCreateCard = document.querySelector('.modal__button-create');
 
 //Função para fazer a pagina ficar opaca quando o modal for aberto.
 function togglePageOpacity () {
@@ -60,6 +61,7 @@ function handleProfileFormSubmit(evt) {
   toggleModal();
   formElement.reset(); //reset os inputs do formulario apos o submit, se fechar o modal nao
   
+  
 }
 
 formElement.addEventListener('submit', handleProfileFormSubmit);
@@ -98,7 +100,6 @@ function addCard(imageLink, imageTitle) {
   const userTemplate = document.querySelector('#element').content; // variavel que pega o conteudo da id do template
   const itemElement = userTemplate.querySelector('.element').cloneNode(true); //clona todo conteudo 
 
-
   itemElement.querySelector('.element__image').src = imageLink //o src da imagem é igual ao parametro imageLink
   itemElement.querySelector('.element__title').textContent = imageTitle 
 
@@ -109,4 +110,14 @@ function addCard(imageLink, imageTitle) {
 //Método de repeticao onde vou iterar sobre cada item do array, chamando a função para adicionar o card na pagina. Pode ser feito tb com laço for.
 initialCards.forEach(function (item) {
   addCard(item.link, item.name)
+})
+
+//Adiciona um novo card
+const modalFormAdd = document.querySelector('.modal_form_add')
+buttonCreateCard.addEventListener('click', function () {
+  const imageName = document.querySelector('.modal__input_title');
+  const imageLink = document.querySelector('.modal__input_link');
+  addCard(imageLink.value, imageName.value);
+  toggleModalAdd();
+
 })
