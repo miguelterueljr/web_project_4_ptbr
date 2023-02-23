@@ -6,3 +6,8 @@
     border: none;
     
   }
+
+  .modal-image__button:hover {
+    opacity: .5;
+    cursor: pointer;
+  }
