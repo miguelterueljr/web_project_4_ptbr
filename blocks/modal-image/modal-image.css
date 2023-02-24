@@ -9,11 +9,14 @@
   position: fixed;
   z-index: 2;
   gap: 10px;
-  top: 5%;
+  top: 50%;
   left: 50%;
   /*Margin-left negativo do resultado da metade de widht, para ficar centralizado*/
-  margin-left: -245px;
+  transform: translate(-50%, -50%);
   
+  opacity: 0;
+
+  transition: visibility 0.8s linear, opacity 0.5s linear; /*animacao quando abrir e fechar o modal*/
 }
 
 
