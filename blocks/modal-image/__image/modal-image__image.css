@@ -3,5 +3,7 @@
     width: 443px;
     height: 540px;
     object-fit: cover;
+    transform: scale(0); /*efeito sobre a escala*/
+    transition: all linear .3s;
   }
   

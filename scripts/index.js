@@ -48,6 +48,10 @@ function handleProfileFormSubmit(evt) {
   /*variaveis que vao receber os valores digitados nos inputs respectivamente*/
   const addName = nameInput.value; 
   const addJob = jobInput.value;
+
+  /*Faz os placeholders terem os campos digitados*/
+  nameInput.placeholder = addName;
+  jobInput.placeholder = addJob;
   
   /*variaveis que pegam os locais do html aonde serão alterados meus valores */
   const nameField = document.querySelector('.profile__name');
@@ -59,8 +63,7 @@ function handleProfileFormSubmit(evt) {
   
   
   toggleModal();
-  formElement.reset(); //reset os inputs do formulario apos o submit, se fechar o modal nao
-  
+  formElement.reset(); //reset os inputs do formulario apos o submit, se fechar o modal nao 
   
 }
 
@@ -101,12 +104,14 @@ function addCard(imageLink, imageTitle) {
   const userTemplate = document.querySelector('#element').content; // variavel que pega o conteudo da id do template
   const itemElement = userTemplate.querySelector('.element').cloneNode(true); //clona todo conteudo 
 
-  itemElement.querySelector('.element__image').src = imageLink //o src da imagem é igual ao parametro imageLink
-  itemElement.querySelector('.element__title').textContent = imageTitle 
+  //preciso adicionar o alt das imagens
+  itemElement.querySelector('.element__image').alt = `Card contendo o titulo e a foto de ${imageTitle}`;
+  itemElement.querySelector('.element__image').src = imageLink; //o src da imagem é igual ao parametro imageLink
+  itemElement.querySelector('.element__title').textContent = imageTitle; 
 
   //botao curtir
-  itemElement.querySelector('.element__button').addEventListener('click', function(evt) {
-    evt.target.classList.toggle('element__button_active')
+  itemElement.querySelector('.element__button').addEventListener('click', (evt) => {
+    evt.target.classList.toggle('element__button_active');
   });
   
   elements.prepend(itemElement); // adiciono o conteudo dinamicamenta na pagina
@@ -114,7 +119,27 @@ function addCard(imageLink, imageTitle) {
   const removeCardButton = document.querySelector('.element__delete');
   removeCardButton.addEventListener('click', removeCard);
  
-  openModalImage();
+//codigo para abrir o modal de imagens
+  const images = document.querySelectorAll('.element__image');
+  const modalImage = document.querySelector('.modal-image');
+  const modalImgElement = document.querySelector('.modal-image__image');
+  const btnClose = document.querySelector('.modal-image__button');
+  
+  
+  images.forEach(function (item) {
+    item.addEventListener('click', function() {
+      const srcVal = item.getAttribute('src');
+      modalImgElement.setAttribute('src', srcVal);
+      modalImage.classList.add('modal-image__active');
+      makePageBlur.classList.add('page_opacity'); // adiciona opacidade ao fundo
+    })  
+  })
+  
+  btnClose.addEventListener('click', function () {
+    modalImage.classList.remove('modal-image__active');
+    makePageBlur.classList.remove('page_opacity'); //remove opacidade do fundo
+    
+  });
   
 }
 
@@ -124,13 +149,18 @@ initialCards.forEach(function (item) {
 })
 
 //Adiciona um novo card
-const modalFormAdd = document.querySelector('.modal_form_add')
-buttonCreateCard.addEventListener('click', function () {
+const modalFormAdd = document.querySelector('.modal-add')
+modalFormAdd.addEventListener('submit', (evt) => {
+  evt.preventDefault();
   const imageName = document.querySelector('.modal__input_title');
   const imageLink = document.querySelector('.modal__input_link');
-  addCard(imageLink.value, imageName.value);
+  addCard(imageLink.value, imageName.value); 
   toggleModalAdd();
-
+  
+  //codigo abaixo faz o formulario ter os campos d eimput limpos apos submit
+  imageName.value = ''; 
+  imageLink.value = '';
+  
 })
 
 //deleta card
@@ -145,31 +175,6 @@ function removeCard () {
   })
 }
 
-  //Função abre modal da imagem
-  function openModalImage () {
-    
-    const imagens = document.querySelectorAll('.element__image');
-    const modalImage = document.querySelector('.modal-image');
-    const modalImgElement = document.querySelector('.modal-image__image');
-    const btnClose = document.querySelector('.modal-image__button');
-    let srcVal = ''; //recebe let pq essa variavel vai receber outro valor assim que for executado o laço de repetição
-    
-    
-    imagens.forEach(function (item) {
-      item.addEventListener('click', function() {
-        srcVal = item.getAttribute('src');
-        modalImgElement.setAttribute('src', srcVal);
-        modalImage.classList.add('modal-image__active');
-        
-      })
-      
-    })
 
-    btnClose.addEventListener('click', function () {
-      modalImage.classList.remove('modal-image__active');
-      
-    });
-    
-  };
 
   
