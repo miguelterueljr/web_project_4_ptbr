@@ -63,7 +63,7 @@ function handleProfileFormSubmit(evt) {
   
   
   toggleModal();
-  formElement.reset(); //reset os inputs do formulario apos o submit, se fechar o modal nao 
+  
   
 }
 
@@ -124,7 +124,8 @@ function addCard(imageLink, imageTitle) {
   const modalImage = document.querySelector('.modal-image');
   const modalImgElement = document.querySelector('.modal-image__image');
   const btnClose = document.querySelector('.modal-image__button');
-  
+  const modalTitle = document.querySelector('.modal-image__title');
+  const getModalTitle = document.querySelectorAll('.element__title')
   
   images.forEach(function (item) {
     item.addEventListener('click', function() {
@@ -132,8 +133,14 @@ function addCard(imageLink, imageTitle) {
       modalImgElement.setAttribute('src', srcVal);
       modalImage.classList.add('modal-image__active');
       makePageBlur.classList.add('page_opacity'); // adiciona opacidade ao fundo
+
+      //aqui pego o titulo da imagem e retorno seu conetudo 
+      const imageTitle = item.parentNode.querySelector('.element__title').textContent;
+      modalTitle.textContent = imageTitle;
     })  
   })
+
+  
   
   btnClose.addEventListener('click', function () {
     modalImage.classList.remove('modal-image__active');
@@ -143,7 +150,7 @@ function addCard(imageLink, imageTitle) {
   
 }
 
-//Método de repeticao onde vou iterar sobre cada item do array, chamando a função para adicionar o card na pagina. Pode ser feito tb com laço for.
+//itero sobre cada item e chamo funcao para adicionar card
 initialCards.forEach(function (item) {
   addCard(item.link, item.name)
 })
