@@ -125,7 +125,7 @@ function addCard(imageLink, imageTitle) {
   const modalImgElement = document.querySelector('.modal-image__image');
   const btnClose = document.querySelector('.modal-image__button');
   const modalTitle = document.querySelector('.modal-image__title');
-  const getModalTitle = document.querySelectorAll('.element__title')
+  
   
   images.forEach(function (item) {
     item.addEventListener('click', function() {
