@@ -133,10 +133,13 @@ function addCard(imageLink, imageTitle) {
       modalImgElement.setAttribute('src', srcVal);
       modalImage.classList.add('modal-image__active');
       makePageBlur.classList.add('page_opacity'); // adiciona opacidade ao fundo
+      const imgAlt = item.getAttribute('alt'); //muda atributo alt
+      modalImgElement.setAttribute('alt', imgAlt);
 
       //aqui pego o titulo da imagem e retorno seu conetudo 
       const imageTitle = item.parentNode.querySelector('.element__title').textContent;
       modalTitle.textContent = imageTitle;
+      
     })  
   })
 
