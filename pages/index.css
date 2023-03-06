@@ -18,8 +18,10 @@
 @import url(../blocks/modal/__form/modal__form.css);
 @import url(../blocks/modal/__input/modal__input.css);
 @import url(../blocks/modal/__button/modal__button-save.css);
+
 /*Classe que sera inserida via JS para que o modal apareça*/
 @import url(../blocks/modal/_opened/modal_opened.css);
+
 
 /*bloco modal de adicionar card*/
 @import url(../blocks/modal/__button/modal__button-create.css);
@@ -63,3 +65,8 @@
 /*bloco footer*/
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__title/footer__title.css);
+
+
+/*Classes para erro das validações do formulário*/
+@import url(../blocks/modal/__input/_type/modal__input_type_error.css);
+@import url(../blocks/modal/__input-separation/modal__input-separation.css);

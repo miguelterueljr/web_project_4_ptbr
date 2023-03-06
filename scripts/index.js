@@ -203,4 +203,5 @@ page.addEventListener('mouseup', (evt) => {
   page.classList.remove('page_opacity');
   modalAdd.classList.remove('modal_opened');
   modalImage.classList.remove('modal-image__active');
-})
+});
+
