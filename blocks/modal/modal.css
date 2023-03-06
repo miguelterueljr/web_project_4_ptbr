@@ -10,7 +10,7 @@
 
 .modal {
   width: 470px; /*Na verdade o bloco branco tem 430, porem mais 40 de cada lado para fazer o x ficar ao lado*/
-  height: 385px;
+  height: 390px;
 
   /*faz o modal se nao for chamado ficar escondido*/
   visibility: hidden;

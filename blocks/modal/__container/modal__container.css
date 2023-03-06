@@ -1,7 +1,7 @@
 .modal__container {
   background-color: #ffffff;
   max-width: 430px;
-  height: 345px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;

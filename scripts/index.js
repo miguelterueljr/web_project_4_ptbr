@@ -17,10 +17,12 @@ function togglePageOpacity () {
 function toggleModal() {
   togglePageOpacity();
   modal.classList.toggle('modal_opened');
+  
 }
 
 editButton.addEventListener('click', toggleModal);
 closeButton.addEventListener('click', toggleModal);
+
 
 /*bloco para abrir modal de adicionar card*/
 const addButton = document.querySelector('.button-add');
@@ -35,6 +37,7 @@ function toggleModalAdd() {
 
 addButton.addEventListener('click', toggleModalAdd);
 buttonCloseAdd.addEventListener('click', toggleModalAdd);
+
 
 
 /*Bloco de código para fazer o botão salvar*/
@@ -149,6 +152,7 @@ function addCard(imageLink, imageTitle) {
   btnClose.addEventListener('click', function () {
     modalImage.classList.remove('modal-image__active');
     page.classList.remove('page_opacity'); //remove opacidade do fundo
+    
     
   });
   

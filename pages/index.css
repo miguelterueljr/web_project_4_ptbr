@@ -70,3 +70,5 @@
 /*Classes para erro das validações do formulário*/
 @import url(../blocks/modal/__input/_type/modal__input_type_error.css);
 @import url(../blocks/modal/__input-separation/modal__input-separation.css);
+@import url(../blocks/button/__inactive/button__inactive.css);
+@import url(../blocks/modal/__input-error/modal__input-error.css)
