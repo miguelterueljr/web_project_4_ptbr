@@ -2,12 +2,15 @@ const editButton = document.querySelector('.button-edit');
 const modal = document.querySelector('.modal'); 
 const closeButton = document.querySelector('.modal__button-close'); 
 const saveButton = document.querySelector('.modal__button-save');
-const makePageBlur = document.querySelector('.page')
+const page = document.querySelector('.page')
 const buttonCreateCard = document.querySelector('.modal__button-create');
+const modalImage = document.querySelector('.modal-image');
+
+
 
 //Função para fazer a pagina ficar opaca quando o modal for aberto.
 function togglePageOpacity () {
-  makePageBlur.classList.toggle('page_opacity');
+  page.classList.toggle('page_opacity');
 }
 
 /*Funcao para adicior ou remover o modal*/
@@ -132,7 +135,7 @@ function addCard(imageLink, imageTitle) {
       const srcVal = item.getAttribute('src');
       modalImgElement.setAttribute('src', srcVal);
       modalImage.classList.add('modal-image__active');
-      makePageBlur.classList.add('page_opacity'); // adiciona opacidade ao fundo
+      page.classList.add('page_opacity'); // adiciona opacidade ao fundo
       const imgAlt = item.getAttribute('alt'); //muda atributo alt
       modalImgElement.setAttribute('alt', imgAlt);
 
@@ -140,14 +143,12 @@ function addCard(imageLink, imageTitle) {
       const imageTitle = item.parentNode.querySelector('.element__title').textContent;
       modalTitle.textContent = imageTitle;
       
-    })  
+    })
   })
 
-  
-  
   btnClose.addEventListener('click', function () {
     modalImage.classList.remove('modal-image__active');
-    makePageBlur.classList.remove('page_opacity'); //remove opacidade do fundo
+    page.classList.remove('page_opacity'); //remove opacidade do fundo
     
   });
   
@@ -185,6 +186,21 @@ function removeCard () {
   })
 }
 
+//Escutador de eventos para fechar modal ao pressionar ESC
+document.addEventListener('keydown', (evt) => {
+  if(evt.key === "Escape") {
+    modal.classList.remove('modal_opened');
+    page.classList.remove('page_opacity');
+    modalAdd.classList.remove('modal_opened');
+    modalImage.classList.remove('modal-image__active');
+  }
+});
 
 
-  
+//escutador de eventos para fechar modal ao clicar fora do modal
+page.addEventListener('mouseup', (evt) => {
+  modal.classList.remove('modal_opened');
+  page.classList.remove('page_opacity');
+  modalAdd.classList.remove('modal_opened');
+  modalImage.classList.remove('modal-image__active');
+})
