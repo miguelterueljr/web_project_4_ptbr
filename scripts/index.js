@@ -75,6 +75,7 @@ function handleProfileFormSubmit(evt) {
 
 formElement.addEventListener('submit', handleProfileFormSubmit);
 
+/*
 //Array com cards Iniciais
 const initialCards = [
   {
@@ -163,6 +164,8 @@ initialCards.forEach(function (item) {
   addCard(item.link, item.name)
 })
 
+*/
+
 //Adiciona um novo card
 const modalFormAdd = document.querySelector('.modal-add')
 modalFormAdd.addEventListener('submit', (evt) => {
@@ -172,7 +175,7 @@ modalFormAdd.addEventListener('submit', (evt) => {
   addCard(imageLink.value, imageName.value); 
   toggleModalAdd();
   
-  //codigo abaixo faz o formulario ter os campos d eimput limpos apos submit
+  //codigo abaixo faz o formulario ter os campos de imput limpos apos submit
   imageName.value = ''; 
   imageLink.value = '';
   

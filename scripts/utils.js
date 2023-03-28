@@ -1,0 +1,1 @@
+//contem codigo dos manipulaodres de evento e função que abre e fecha modals
