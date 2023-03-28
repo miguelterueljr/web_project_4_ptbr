@@ -181,7 +181,7 @@ modalFormAdd.addEventListener('submit', (evt) => {
   
 })
 
-//deleta card
+/*deleta card
 function removeCard () {
   const removeCard = document.querySelectorAll('.element__delete');
 
@@ -192,6 +192,7 @@ function removeCard () {
     element.addEventListener('click', deleteACard)
   })
 }
+*/
 
 //Escutador de eventos para fechar modal ao pressionar ESC
 document.addEventListener('keydown', (evt) => {

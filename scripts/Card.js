@@ -26,62 +26,17 @@ const initialCards = [
   }
 ]
 
-/*
-//Função adicionar Cards
-function addCard(imageLink, imageTitle) {
-  
-  const elements = document.querySelector('.elements');
-  const userTemplate = document.querySelector('#element').content; // variavel que pega o conteudo da id do template
-  const itemElement = userTemplate.querySelector('.element').cloneNode(true); //clona todo conteudo 
+//essa funcao esta duplicada, ou exportar ou deletar do index.js
+function removeCard () {
+  const removeCard = document.querySelectorAll('.element__delete');
 
-  //preciso adicionar o alt das imagens
-  itemElement.querySelector('.element__image').alt = `Card contendo o titulo e a foto de ${imageTitle}`;
-  itemElement.querySelector('.element__image').src = imageLink; //o src da imagem é igual ao parametro imageLink
-  itemElement.querySelector('.element__title').textContent = imageTitle; 
-
-  //botao curtir
-  itemElement.querySelector('.element__button').addEventListener('click', (evt) => {
-    evt.target.classList.toggle('element__button_active');
-  });
-  
-  elements.prepend(itemElement); // adiciono o conteudo dinamicamenta na pagina
-  
-  const removeCardButton = document.querySelector('.element__delete');
-  removeCardButton.addEventListener('click', removeCard);
- 
-//codigo para abrir o modal de imagens
-  const images = document.querySelectorAll('.element__image');
-  const modalImage = document.querySelector('.modal-image');
-  const modalImgElement = document.querySelector('.modal-image__image');
-  const btnClose = document.querySelector('.modal-image__button');
-  const modalTitle = document.querySelector('.modal-image__title');
-  
-  
-  images.forEach(function (item) {
-    item.addEventListener('click', function() {
-      const srcVal = item.getAttribute('src');
-      modalImgElement.setAttribute('src', srcVal);
-      modalImage.classList.add('modal-image__active');
-      page.classList.add('page_opacity'); // adiciona opacidade ao fundo
-      const imgAlt = item.getAttribute('alt'); //muda atributo alt
-      modalImgElement.setAttribute('alt', imgAlt);
-
-      //aqui pego o titulo da imagem e retorno seu conetudo 
-      const imageTitle = item.parentNode.querySelector('.element__title').textContent;
-      modalTitle.textContent = imageTitle;
-      
-    })
+  removeCard.forEach((element)=> {
+    function deleteACard(evt) {
+      evt.target.parentElement.parentElement.remove();
+    }
+    element.addEventListener('click', deleteACard)
   })
-
-  btnClose.addEventListener('click', function () {
-    modalImage.classList.remove('modal-image__active');
-    page.classList.remove('page_opacity'); //remove opacidade do fundo
-    
-    
-  });
-  
 }
-*/
 
 class Card {
   constructor (imageLink, imageTitle) {
@@ -100,17 +55,37 @@ class Card {
     return cardElement;
   }
 
+
+ // escutadores de eventos p/ botao curtir e deletar
+  _setEventListeners() {
+    //botao curtir
+    this._element.querySelector('.element__button').addEventListener('click', (evt) => {
+      evt.target.classList.toggle('element__button_active');
+    });
+
+    //botao deletar
+    this._element.querySelector('.element__delete').addEventListener('click', () => {
+      this._element.remove();
+    });
+  };
+
   generateCard() {
     //armazena marcacao no campo privado _element, para que tds os outros possam acessa-lo
     this._element = this._getTemplate();
+    this._setEventListeners();
 
-    //adiciona dados
+    //adiciona dados, alt src e titulo
+    this._element.querySelector('.element__image').alt = `Card contendo a foto e o titulo de ${this._imageTitle}`;
     this._element.querySelector('.element__image').src = this._imageLink;
     this._element.querySelector('.element__title').textContent = this._imageTitle;
 
     //retorna elemento
     return this._element;
   }
+
+  
+
+
 
 }
 
