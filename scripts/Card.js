@@ -1,3 +1,11 @@
+const modalImage = document.querySelector('.modal-image');
+const modalImgElement = document.querySelector('.modal-image__image');
+const btnClose = document.querySelector('.modal-image__button');
+const modalTitle = document.querySelector('.modal-image__title');
+const page = document.querySelector('.page')
+
+
+
 //Array com cards Iniciais
 const initialCards = [
   {
@@ -26,7 +34,7 @@ const initialCards = [
   }
 ]
 
-//essa funcao esta duplicada, ou exportar ou deletar do index.js
+//essa funcao deve estar contida no index.js so esta aqui para eu testar a implementação
 function removeCard () {
   const removeCard = document.querySelectorAll('.element__delete');
 
@@ -67,6 +75,25 @@ class Card {
     this._element.querySelector('.element__delete').addEventListener('click', () => {
       this._element.remove();
     });
+
+    //evento ao clicar na imagem
+  
+    this._element.querySelector('.element__image').addEventListener('click', () => {
+      const srcVal = this._element.querySelector('.element__image').getAttribute('src');
+      modalImgElement.setAttribute('src', srcVal);
+      modalImage.classList.add('modal-image__active');
+      page.classList.add('page_opacity');
+      const imgAlt = this._element.querySelector('.element__image').getAttribute('alt');
+      modalImgElement.setAttribute('alt', imgAlt);
+      const imageTitle = this._element.querySelector('.element__title').textContent;
+      modalTitle.textContent = imageTitle;
+    });
+
+    //fechar o modal quando a imagem estiver clicada e em foco
+    btnClose.addEventListener('click', function () {
+      modalImage.classList.remove('modal-image__active');
+      page.classList.remove('page_opacity'); //remove opacidade do fundo
+    });
   };
 
   generateCard() {
@@ -84,11 +111,10 @@ class Card {
   }
 
   
-
-
-
 }
 
+
+//provavelmete esse fica no index junto com o array initialCards e exporto a classe pra ele ??????
 initialCards.forEach((item) => {
   //cria instancia do cartao
   const card = new Card (item.link, item.name);
