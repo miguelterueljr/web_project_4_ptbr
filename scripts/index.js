@@ -1,3 +1,8 @@
+import {Card} from "./Card.js"
+import { togglePageOpacity, toggleModal, toggleModalAdd, handleProfileFormSubmit } from "./utils.js";
+
+
+
 const editButton = document.querySelector('.button-edit'); 
 const modal = document.querySelector('.modal'); 
 const closeButton = document.querySelector('.modal__button-close'); 
@@ -6,74 +11,101 @@ const page = document.querySelector('.page')
 const buttonCreateCard = document.querySelector('.modal__button-create');
 const modalImage = document.querySelector('.modal-image');
 
+//Faz modal do edit abrir
+editButton.addEventListener('click', () => {
+  togglePageOpacity(page);
+  toggleModal(modal);
+
+});
+
+//faz botao de close do modal fechar
+closeButton.addEventListener('click', () => {
+  togglePageOpacity(page);
+  toggleModal(modal);
+});
 
 
-//Função para fazer a pagina ficar opaca quando o modal for aberto.
-function togglePageOpacity () {
-  page.classList.toggle('page_opacity');
-}
-
-/*Funcao para adicior ou remover o modal*/
-function toggleModal() {
-  togglePageOpacity();
-  modal.classList.toggle('modal_opened');
-  
-}
-
-editButton.addEventListener('click', toggleModal);
-closeButton.addEventListener('click', toggleModal);
-
-
-/*bloco para abrir modal de adicionar card*/
+/*bloco para abrir modal de adicionar card ---- Variaveis utilizadas*/
 const addButton = document.querySelector('.button-add');
 const modalAdd = document.querySelector('.modal-add');
 const buttonCloseAdd = document.querySelector('.button-close')
 
-/*Funcao mostra modal do adicionar card e tira*/
-function toggleModalAdd() {
-  togglePageOpacity();
-  modalAdd.classList.toggle('modal_opened');
-}
+addButton.addEventListener('click', () => {
+  togglePageOpacity(page);
+  toggleModalAdd(modalAdd);
+});
 
-addButton.addEventListener('click', toggleModalAdd);
-buttonCloseAdd.addEventListener('click', toggleModalAdd);
-
-
+buttonCloseAdd.addEventListener('click', () => {
+  togglePageOpacity(page);
+  toggleModalAdd(modalAdd);
+});
 
 /*Bloco de código para fazer o botão salvar*/
 const formElement = document.querySelector('.modal__form');  //pego formulario
 
-function handleProfileFormSubmit(evt) {
-  //linha abaixo previne que o botao envie o formulario da forma padrao
+formElement.addEventListener('submit', (evt) => {
+  handleProfileFormSubmit(evt);
+  toggleModal(modal);
+  togglePageOpacity(page);
+});
+
+//Array com cards Iniciais
+const initialCards = [
+  {
+    name: "Grand Kanyon",
+    link: "./images/grand-canyon.jpg"
+  },
+  {
+    name: "Dallas Airport",
+    link: "./images/dallas-airport.jpg"
+  },
+  {
+    name: "Golden Gate",
+    link: "./images/golden-gate.png"
+  },
+  {
+    name: "Miami",
+    link: "./images/miami.jpg"
+  },
+  {
+    name: "Statue of Liberty",
+    link: "./images/statue-of-liberty.jpg"
+  },
+  {
+    name: "Lake Tahoe",
+    link: "./images/tahoe-lake.webp"
+  }
+]
+
+//Loop para iterar sobre o array initialCards passando os parametros para classe Card. criando os cards da pagina.
+initialCards.forEach((item) => {
+  //cria instancia do cartao
+  const card = new Card (item.link, item.name);
+
+  //preenche cartão e retorna
+  const cardElement = card.generateCard();
+
+  //Adiciona ao dom
+  document.querySelector('.elements').prepend(cardElement);
+});
+
+//Adiciona um novo card
+const modalFormAdd = document.querySelector('.modal-add')
+modalFormAdd.addEventListener('submit', (evt) => {
   evt.preventDefault();
+  const imageName = document.querySelector('.modal__input_title');
+  const imageLink = document.querySelector('.modal__input_link');
+  const card = new Card(imageLink.value, imageName.value); 
+  const cardElement = card.generateCard();
+  document.querySelector('.elements').prepend(cardElement);
+  toggleModalAdd(modalAdd);
+  togglePageOpacity(page);
   
-  /*variaveis abaixo eu pego os respectivos inputs do formulário*/
-  const nameInput = document.querySelector('.modal__input_name');
-  const jobInput = document.querySelector('.modal__input_job');
-
-  /*variaveis que vao receber os valores digitados nos inputs respectivamente*/
-  const addName = nameInput.value; 
-  const addJob = jobInput.value;
-
-  /*Faz os placeholders terem os campos digitados*/
-  nameInput.placeholder = addName;
-  jobInput.placeholder = addJob;
+  //codigo abaixo faz o formulario ter os campos de imput limpos apos submit
+  imageName.value = ''; 
+  imageLink.value = '';
   
-  /*variaveis que pegam os locais do html aonde serão alterados meus valores */
-  const nameField = document.querySelector('.profile__name');
-  const jobField = document.querySelector('.profile__about');
-  
-  /*Altero valores dos campos com o textContent*/
-  nameField.textContent = addName;
-  jobField.textContent = addJob;
-  
-  
-  toggleModal();
-  
-  
-}
-
-formElement.addEventListener('submit', handleProfileFormSubmit);
+});
 
 
 //Escutador de eventos para fechar modal ao pressionar ESC

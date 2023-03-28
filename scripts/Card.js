@@ -5,48 +5,7 @@ const modalTitle = document.querySelector('.modal-image__title');
 const page = document.querySelector('.page')
 
 
-
-//Array com cards Iniciais
-const initialCards = [
-  {
-    name: "Grand Kanyon",
-    link: "./images/grand-canyon.jpg"
-  },
-  {
-    name: "Dallas Airport",
-    link: "./images/dallas-airport.jpg"
-  },
-  {
-    name: "Golden Gate",
-    link: "./images/golden-gate.png"
-  },
-  {
-    name: "Miami",
-    link: "./images/miami.jpg"
-  },
-  {
-    name: "Statue of Liberty",
-    link: "./images/statue-of-liberty.jpg"
-  },
-  {
-    name: "Lake Tahoe",
-    link: "./images/tahoe-lake.webp"
-  }
-]
-
-//essa funcao deve estar contida no index.js so esta aqui para eu testar a implementação
-function removeCard () {
-  const removeCard = document.querySelectorAll('.element__delete');
-
-  removeCard.forEach((element)=> {
-    function deleteACard(evt) {
-      evt.target.parentElement.parentElement.remove();
-    }
-    element.addEventListener('click', deleteACard)
-  })
-}
-
-class Card {
+export class Card {
   constructor (imageLink, imageTitle) {
     this._imageLink = imageLink;
     this._imageTitle = imageTitle;
@@ -110,20 +69,7 @@ class Card {
     return this._element;
   }
 
-  
-}
+};
 
 
-//provavelmete esse fica no index junto com o array initialCards e exporto a classe pra ele ??????
-initialCards.forEach((item) => {
-  //cria instancia do cartao
-  const card = new Card (item.link, item.name);
 
-  //preenche cartão e retorna
-  const cardElement = card.generateCard();
-
-  //Adiciona ao dom
-  document.querySelector('.elements').prepend(cardElement);
-
-
-})
