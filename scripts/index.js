@@ -76,20 +76,24 @@ const initialCards = [
   }
 ]
 
-//Loop para iterar sobre o array initialCards passando os parametros para classe Card. criando os cards da pagina.
-initialCards.forEach((item) => {
-  //cria instancia do cartao
-  const card = new Card (item.link, item.name);
-
-  //preenche cartão e retorna
-  const cardElement = card.generateCard();
-
-  //Adiciona ao dom
-  document.querySelector('.elements').prepend(cardElement);
-});
+//Funcao para fazer loop sobre array initialCards, criando os cards iniciais.
+function addInitialCards() {
+  initialCards.forEach((item) => {
+    //cria instancia do cartao
+    const card = new Card (item.link, item.name);
+  
+    //preenche cartão e retorna
+    const cardElement = card.generateCard();
+  
+    //Adiciona ao dom
+    document.querySelector('.elements').prepend(cardElement);
+  });
+}
+addInitialCards();
 
 //Adiciona um novo card
-const modalFormAdd = document.querySelector('.modal-add')
+const modalFormAdd = document.querySelector('.modal-add');
+const formAddImage = document.querySelector('.modal__form_add')
 modalFormAdd.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const imageName = document.querySelector('.modal__input_title');
@@ -101,8 +105,7 @@ modalFormAdd.addEventListener('submit', (evt) => {
   togglePageOpacity(page);
   
   //codigo abaixo faz o formulario ter os campos de imput limpos apos submit
-  imageName.value = ''; 
-  imageLink.value = '';
+  formAddImage.reset()
   
 });
 

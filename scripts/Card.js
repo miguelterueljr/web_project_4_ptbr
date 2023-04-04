@@ -6,9 +6,13 @@ const page = document.querySelector('.page')
 
 
 export class Card {
-  constructor (imageLink, imageTitle) {
+  constructor(imageLink, imageTitle, modalImage, modalImgElement, modalTitle, page) {
     this._imageLink = imageLink;
     this._imageTitle = imageTitle;
+    this._modalImage = modalImage;
+    this._modalImgElement = modalImgElement;
+    this._modalTitle = modalTitle;
+    this._page = page;
   }
 
   //pega bloco template do html
@@ -20,6 +24,18 @@ export class Card {
     .cloneNode(true);
 
     return cardElement;
+  }
+
+  //metodo para abrir iamgem e seu titulo em zoom
+  handleClick() {
+    const srcVal = this._element.querySelector('.element__image').getAttribute('src');
+    modalImgElement.setAttribute('src', srcVal);
+    modalImage.classList.add('modal-image__active');
+    page.classList.add('page_opacity');
+    const imgAlt = this._element.querySelector('.element__image').getAttribute('alt');
+    modalImgElement.setAttribute('alt', imgAlt);
+    const imageTitle = this._element.querySelector('.element__title').textContent;
+    modalTitle.textContent = imageTitle;
   }
 
 
@@ -36,17 +52,11 @@ export class Card {
     });
 
     //evento ao clicar na imagem
-  
-    this._element.querySelector('.element__image').addEventListener('click', () => {
-      const srcVal = this._element.querySelector('.element__image').getAttribute('src');
-      modalImgElement.setAttribute('src', srcVal);
-      modalImage.classList.add('modal-image__active');
-      page.classList.add('page_opacity');
-      const imgAlt = this._element.querySelector('.element__image').getAttribute('alt');
-      modalImgElement.setAttribute('alt', imgAlt);
-      const imageTitle = this._element.querySelector('.element__title').textContent;
-      modalTitle.textContent = imageTitle;
-    });
+    
+    
+
+    this._element.querySelector('.element__image').addEventListener('click', this.handleClick.bind(this));
+
 
     //fechar o modal quando a imagem estiver clicada e em foco
     btnClose.addEventListener('click', function () {
