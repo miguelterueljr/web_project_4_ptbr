@@ -1,6 +1,7 @@
 import {Card} from "./Card.js"
 import { togglePageOpacity, toggleModal, toggleModalAdd, handleProfileFormSubmit } from "./utils.js";
 import { FormValidator } from "./FormValidator.js";
+import { UserInfo } from "./UserInfo.js";
 
 const editButton = document.querySelector('.button-edit'); 
 const modal = document.querySelector('.modal'); 

@@ -52,9 +52,6 @@ export class Card {
     });
 
     //evento ao clicar na imagem
-    
-    
-
     this._element.querySelector('.element__image').addEventListener('click', this.handleClick.bind(this));
 
 
