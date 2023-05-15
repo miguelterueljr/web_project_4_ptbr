@@ -15,18 +15,6 @@ export function togglePageOpacity (page) {
   page.classList.toggle('page_opacity');
 }
 
-/*Funcao para adicior ou remover o modal*/
-export function toggleModal(modal) {
-  
-  modal.classList.toggle('modal_opened');
-  
-}
-
-/*Funcao mostra modal do adicionar card e tira*/
-export function toggleModalAdd(modalAdd) {
-  modalAdd.classList.toggle('modal_opened');
-}
-
 import { UserInfo } from './UserInfo.js';
 
 //funcao para botao salbar do modal edit

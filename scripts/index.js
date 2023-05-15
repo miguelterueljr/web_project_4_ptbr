@@ -1,27 +1,31 @@
 import {Card} from "./Card.js"
-import { togglePageOpacity, toggleModal, toggleModalAdd, handleProfileFormSubmit } from "./utils.js";
+import { togglePageOpacity, handleProfileFormSubmit } from "./utils.js";
 import { FormValidator } from "./FormValidator.js";
 import { UserInfo } from "./UserInfo.js";
+import { Popup } from "./Popup.js";
 
 const editButton = document.querySelector('.button-edit'); 
 const modal = document.querySelector('.modal'); 
 const closeButton = document.querySelector('.modal__button-close'); 
 const saveButton = document.querySelector('.modal__button-save');
-const page = document.querySelector('.page')
+export const page = document.querySelector('.page')
 const buttonCreateCard = document.querySelector('.modal__button-create');
 const modalImage = document.querySelector('.modal-image');
+const openModal = new Popup ('.modal')
+const openModalAdd = new Popup('.modal-add')
+
 
 //Faz modal do edit abrir
 editButton.addEventListener('click', () => {
   togglePageOpacity(page);
-  toggleModal(modal);
+  openModal.open();
 
 });
 
 //faz botao de close do modal fechar
 closeButton.addEventListener('click', () => {
   togglePageOpacity(page);
-  toggleModal(modal);
+  openModal.close();
 });
 
 
@@ -32,12 +36,12 @@ const buttonCloseAdd = document.querySelector('.button-close')
 
 addButton.addEventListener('click', () => {
   togglePageOpacity(page);
-  toggleModalAdd(modalAdd);
+  openModalAdd.open();
 });
 
 buttonCloseAdd.addEventListener('click', () => {
   togglePageOpacity(page);
-  toggleModalAdd(modalAdd);
+  openModalAdd.close();
 });
 
 /*Bloco de código para fazer o botão salvar*/
@@ -45,7 +49,7 @@ const formElement = document.querySelector('.modal__form');  //pego formulario
 
 formElement.addEventListener('submit', (evt) => {
   handleProfileFormSubmit(evt);
-  toggleModal(modal);
+  openModal.close();
   togglePageOpacity(page);
 });
 
@@ -102,7 +106,7 @@ modalFormAdd.addEventListener('submit', (evt) => {
   const card = new Card(imageLink.value, imageName.value); 
   const cardElement = card.generateCard();
   document.querySelector('.elements').prepend(cardElement);
-  toggleModalAdd(modalAdd);
+  openModalAdd.close();
   togglePageOpacity(page);
   
   //codigo abaixo faz o formulario ter os campos de imput limpos apos submit
@@ -114,19 +118,15 @@ modalFormAdd.addEventListener('submit', (evt) => {
 //Escutador de eventos para fechar modal ao pressionar ESC
 document.addEventListener('keydown', (evt) => {
   if(evt.key === "Escape") {
-    modal.classList.remove('modal_opened');
-    page.classList.remove('page_opacity');
-    modalAdd.classList.remove('modal_opened');
-    modalImage.classList.remove('modal-image__active');
+    openModal._handleEscClose();
+    openModalAdd._handleEscClose();
   }
 });
 
 
 //escutador de eventos para fechar modal ao clicar fora do modal
 page.addEventListener('mouseup', (evt) => {
-  modal.classList.remove('modal_opened');
-  page.classList.remove('page_opacity');
-  modalAdd.classList.remove('modal_opened');
-  modalImage.classList.remove('modal-image__active');
+  openModal.setEventListeners();
+  openModalAdd.setEventListeners();
 });
 
