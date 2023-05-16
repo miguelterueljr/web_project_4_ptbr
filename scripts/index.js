@@ -3,6 +3,7 @@ import { togglePageOpacity, handleProfileFormSubmit } from "./utils.js";
 import { FormValidator } from "./FormValidator.js";
 import { UserInfo } from "./UserInfo.js";
 import { Popup } from "./Popup.js";
+import { Section } from "./Section.js";
 
 const editButton = document.querySelector('.button-edit'); 
 const modal = document.querySelector('.modal'); 
@@ -81,20 +82,21 @@ const initialCards = [
   }
 ]
 
-//Funcao para fazer loop sobre array initialCards, criando os cards iniciais.
-function addInitialCards() {
-  initialCards.forEach((item) => {
-    //cria instancia do cartao
-    const card = new Card (item.link, item.name);
-  
-    //preenche cartão e retorna
-    const cardElement = card.generateCard();
-  
-    //Adiciona ao dom
-    document.querySelector('.elements').prepend(cardElement);
-  });
-}
-addInitialCards();
+// Crie uma instância da classe Section essa vai renderizar na pagina, substitiu minha antiga addInitialCards
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: item => {
+      const card = new Card(item.link, item.name);
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+    }
+  },
+  '.elements'
+);
+
+// Renderize os elementos do cartão
+cardList.render();
 
 //Adiciona um novo card
 const modalFormAdd = document.querySelector('.modal-add');
