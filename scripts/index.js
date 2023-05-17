@@ -4,6 +4,7 @@ import { FormValidator } from "./FormValidator.js";
 import { UserInfo } from "./UserInfo.js";
 import { Popup } from "./Popup.js";
 import { Section } from "./Section.js";
+import { PopupWithImage } from "./PopupWithImage.js";
 
 const editButton = document.querySelector('.button-edit'); 
 const modal = document.querySelector('.modal'); 
@@ -14,6 +15,7 @@ const buttonCreateCard = document.querySelector('.modal__button-create');
 const modalImage = document.querySelector('.modal-image');
 const openModal = new Popup ('.modal')
 const openModalAdd = new Popup('.modal-add')
+
 
 
 //Faz modal do edit abrir

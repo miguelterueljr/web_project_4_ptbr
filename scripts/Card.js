@@ -1,3 +1,5 @@
+import { PopupWithImage } from "./PopupWithImage.js";
+
 const modalImage = document.querySelector('.modal-image');
 const modalImgElement = document.querySelector('.modal-image__image');
 const btnClose = document.querySelector('.modal-image__button');
@@ -27,10 +29,12 @@ export class Card {
   }
 
   //metodo para abrir iamgem e seu titulo em zoom
+  //aqui q irei chamar minha classe PopupWithImage, so nao sei como ainda.
   handleClick() {
     const srcVal = this._element.querySelector('.element__image').getAttribute('src');
     modalImgElement.setAttribute('src', srcVal);
-    modalImage.classList.add('modal-image__active');
+    const popupWithImage = new PopupWithImage('.modal-image');
+    popupWithImage.open();
     page.classList.add('page_opacity');
     const imgAlt = this._element.querySelector('.element__image').getAttribute('alt');
     modalImgElement.setAttribute('alt', imgAlt);
