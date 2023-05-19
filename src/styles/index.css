@@ -1,0 +1,71 @@
+/*importação normalize*/
+@import url(./vendor/normalize.css);
+
+/*importação normalize*/
+@import url(../fonts/Inter-Web/inter.css);
+
+/*importação root e page - blocos baiscos do meu html*/
+@import url(./blocks/root/root.css);
+@import url(./blocks/page/page.css);
+/*faz a pagina ficar mais opaca para aparição do modal*/
+@import url(./blocks/page/_opacity/page_opacity.css);
+
+/*blocos modais - quero que carregue antes para nao ter risco de exibir algum modal sem o usuario pedir*/
+@import url(./blocks/modal/modal.css);
+@import url(./blocks/modal/__button/modal__button-close.css);
+@import url(./blocks/modal/__container/modal__container.css);
+@import url(./blocks/modal/__title/modal__title.css);
+@import url(./blocks/modal/__form/modal__form.css);
+@import url(./blocks/modal/__input/modal__input.css);
+@import url(./blocks/modal/__button/modal__button-save.css);
+
+/*Classe que sera inserida via JS para que o modal apareça*/
+@import url(./blocks/modal/_opened/modal_opened.css);
+
+/*bloco modal de adicionar card*/
+@import url(./blocks/modal/__button/modal__button-create.css);
+
+/*bloco do modal de imagens quando clicada*/
+@import url(./blocks/modal-image/modal-image.css);
+@import url(./blocks/modal-image/__button/modal-image__button.css);
+@import url(./blocks/modal-image/__image/modal-image__image.css);
+@import url(./blocks/modal-image/__title/modal-image__title.css);
+@import url(./blocks/modal-image/__active/modal-image__active.css);
+
+/*bloco header*/
+@import url(./blocks/header/header.css);
+@import url(./blocks/header/__image/header__image.css);
+@import url(./blocks/header/__line/header__line.css);
+
+/*Profile block*/
+@import url(./blocks/profile/profile.css);
+@import url(./blocks/profile/__container/profile__container.css);
+@import url(./blocks/profile/__image/profile__image.css);
+@import url(./blocks/profile/__name/profile__name.css);
+@import url(./blocks/profile/__about/profile__about.css);
+@import url(./blocks/profile/__title/profile__title.css);
+@import url(./blocks/profile/__info/profile__info.css);
+
+/*estilizacao botoes*/
+@import url(./blocks/button/button.css);
+@import url(./blocks/button/__edit/button__edit.css);
+@import url(./blocks/button/__add/button__add.css);
+
+/*bloco elements e element*/
+@import url(./blocks/elements/elements.css);
+@import url(./blocks/element/element.css);
+@import url(./blocks/element/__image/element__image.css);
+@import url(./blocks/element/__delete/element__delete.css);
+@import url(./blocks/element/__text/element__text.css);
+@import url(./blocks/element/__title/element__title.css);
+@import url(./blocks/element/__button/element__button.css);
+@import url(./blocks/element/__button/_active/element__button_active.css);
+
+/*@import url(../blocks/element/__button/_active/element__button_active.css);*/
+
+
+
+
+/*bloco footer*/
+@import url(./blocks/footer/footer.css);
+@import url(./blocks/footer/__title/footer__title.css);
