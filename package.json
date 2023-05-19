@@ -1,0 +1,14 @@
+{
+  "name": "web_project_4_ptbr",
+  "version": "1.0.0",
+  "description": "Este projeto foi criado com a finalidade de desenvolvimento de habilidades Front-END, neles são utilizadas algumas das stacks mais utilizadas atualmente no desenvolvimento web, como HTML5, CSS e JavaScript. Além do uso da ferramenta de design Figma.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.83.1"
+  }
+}

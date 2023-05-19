@@ -5,6 +5,7 @@ import { UserInfo } from "./UserInfo.js";
 import { Popup } from "./Popup.js";
 import { Section } from "./Section.js";
 import { PopupWithImage } from "./PopupWithImage.js";
+import { PopupWithForm } from "./PopupWithForm.js";
 
 const editButton = document.querySelector('.button-edit'); 
 const modal = document.querySelector('.modal'); 
@@ -13,8 +14,8 @@ const saveButton = document.querySelector('.modal__button-save');
 export const page = document.querySelector('.page')
 const buttonCreateCard = document.querySelector('.modal__button-create');
 const modalImage = document.querySelector('.modal-image');
-const openModal = new Popup ('.modal')
-const openModalAdd = new Popup('.modal-add')
+const openModal = new PopupWithForm('.modal', handleProfileFormSubmit);
+const openModalAdd = new PopupWithForm('.modal-add', handleProfileFormSubmit);
 
 
 
@@ -119,16 +120,15 @@ modalFormAdd.addEventListener('submit', (evt) => {
 });
 
 
-//Escutador de eventos para fechar modal ao pressionar ESC
+// Escutador de eventos para fechar modal ao pressionar ESC
 document.addEventListener('keydown', (evt) => {
-  if(evt.key === "Escape") {
+  if (evt.key === "Escape") {
     openModal._handleEscClose();
     openModalAdd._handleEscClose();
   }
 });
 
-
-//escutador de eventos para fechar modal ao clicar fora do modal
+// Escutador de eventos para fechar modal ao clicar fora do modal
 page.addEventListener('mouseup', (evt) => {
   openModal.setEventListeners();
   openModalAdd.setEventListeners();

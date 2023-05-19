@@ -1,21 +1,37 @@
-//Levar um retorno de chamada do envio do formulário para dentro do construtor e do seletor pop-up.
-
-import { Popup } from "./Popup";
-
-//Armazenar um método privado chamado _getInputValues() que coleta dados de todos os campos de entrada.
-
-//Modificar o método pai setEventListeners(). O método setEventListeners() da classe PopupWithForm precisa adicionar o manipulador de eventos Enviar ao formulário e ao ouvinte de evento click para o ícone de fechamento.
-
-//Modificar o método pai close() para redefinir o formulário assim que o pop-up for fechado.
+import { page } from "./index.js";
+import { Popup } from "./Popup.js";
 
 export class PopupWithForm extends Popup {
-  constructor() {
-    super();
+  constructor(selector, submitCallback) {
+    super(selector);
+    this.submitCallback = submitCallback;
+    this.form = this.selector.querySelector('.modal__form');
+    this.closeButton = this.selector.querySelector('.modal__button-close');
   }
 
   _getInputValues() {
+    const inputList = this.form.querySelectorAll('.modal__input');
+    const formValues = {};
+    inputList.forEach(input => {
+      formValues[input.name] = input.value;
+    });
+    return formValues;
+  }
 
+  setEventListeners() {
+    super.setEventListeners();
+    this.form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      this.submitCallback(this._getInputValues());
+      this.close();
+    });
+    this.closeButton.addEventListener('click', () => {
+      this.close();
+    });
+  }
+
+  close() {
+    super.close();
+    this.form.reset();
   }
 }
-
-//aqui ainda nao sei aonde esta
