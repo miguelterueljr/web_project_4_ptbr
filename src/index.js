@@ -1,5 +1,13 @@
 import "./styles/index.css"
 
+//definicao de variaveis com os caminhos das imagens para o webpack poder gerar elas
+import dallas from "./images/dallas-airport.jpg";
+import golden from "./images/golden-gate.png"
+import grandCanyon from "./images/grand-canyon.jpg"
+import miami from "./images/miami.jpg"
+import statueOfLiberty from "./images/statue-of-liberty.jpg";
+import tahoeLake from "./images/tahoe-lake.webp";
+
 import {Card} from "./Card.js"
 import { togglePageOpacity, handleProfileFormSubmit } from "./utils.js";
 import { FormValidator } from "./FormValidator.js";
@@ -64,27 +72,27 @@ formElement.addEventListener('submit', (evt) => {
 const initialCards = [
   {
     name: "Grand Kanyon",
-    link: "./images/grand-canyon.jpg"
+    link: grandCanyon
   },
   {
     name: "Dallas Airport",
-    link: "./images/dallas-airport.jpg"
+    link: dallas
   },
   {
     name: "Golden Gate",
-    link: "./images/golden-gate.png"
+    link: golden
   },
   {
     name: "Miami",
-    link: "./images/miami.jpg"
+    link: miami
   },
   {
     name: "Statue of Liberty",
-    link: "./images/statue-of-liberty.jpg"
+    link: statueOfLiberty
   },
   {
     name: "Lake Tahoe",
-    link: "./images/tahoe-lake.webp"
+    link: tahoeLake
   }
 ]
 

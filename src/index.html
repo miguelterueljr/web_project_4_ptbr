@@ -5,14 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Around The US</title>
-  <link rel="stylesheet" href="./pages/index.css">
   <link rel="shortcut icon" href="./images/jacques-costeau.jpg" type="image/x-icon">
 </head>
 <body class="root">
 
   <!--modal do edit-profile-->
   <div class="modal">
-    <button class="modal__button-close"><img src="./images/close-icon.png" alt="Icone em formato de fechar com um simbolo de X"></button>
+    <button class="modal__button-close"><img src="<%=require('./images/close-icon.png')%>" alt="Icone em formato de fechar com um simbolo de X"></button>
     <div class="modal__container">
       <h2 class="modal__title">Editar Perfil</h2>
       <form class="modal__form" novalidate>
@@ -31,7 +30,7 @@
 
   <!--modal do adicionar card-->
   <div class="modal modal-add">
-    <button class="modal__button-close button-close"><img src="./images/close-icon.png" alt="Icone em formato de fechar com um simbolo de X"></button>
+    <button class="modal__button-close button-close"><img src="<%=require('./images/close-icon.png')%>" alt="Icone em formato de fechar com um simbolo de X"></button>
     <div class="modal__container">
       <h2 class="modal__title">Novo Local</h2>
       <form class="modal__form modal__form_add" novalidate>
@@ -50,7 +49,7 @@
 
   <!--modal das imagens quando clicadas-->
   <div class="modal-image">
-    <button class="modal-image__button"><img src="./images/close-icon.png" alt="Botão com imagem de x para fechar modal"></button>
+    <button class="modal-image__button"><img src="<%=require('./images/close-icon.png')%>" alt="Botão com imagem de x para fechar modal"></button>
 
     <div class="modal-image__container">
       <img src="./images/miami.jpg" alt="imagem maximizada" class="modal-image__image">
@@ -62,24 +61,25 @@
   <main class="page">
     <section class="header">
       <div class="header__logo">
-        <img src="./images/around-the-us-logo.png" alt="Logotipo around US" class="header__image">
+        <img src="<%=require('./images/around-the-us-logo.png')%>" alt="Logotipo around US" class="header__image">
       </div>
       <hr class="header__line">
     </section>
 
     <section class="profile">
       <div class="profile__container">
-        <img src="./images/jacques-costeau.jpg" alt="Foto JAcques Costeau" class="profile__image">
+        <img src="<%=require('./images/jacques-costeau.jpg')%>" alt="Foto JAcques Costeau" class="profile__image">
         <div class="profile__info">
           <div class="profile__title">
             <h1 class="profile__name">Jacques Costeau</h1>
-            <button class="button button-edit"><img src="./images/button-edit.png" alt="Simbolo de um botão de editar"></button>
+            <button class="button button-edit"><img src="<%=require('./images/button-edit.png')%>" alt="Simbolo de um botão de editar"></button>
+            
           </div>
           <span class="profile__about">Explorar</span>
         </div>
       </div>
       <button class="button button-add">
-        <img src="./images/add-button.png" alt="Botão com o simbolo mais, para adicionar um card">
+        <img src="<%=require('./images/add-button.png')%>" alt="Botão com o simbolo mais, para adicionar um card">
       </button>
     </section>
 
@@ -91,10 +91,10 @@
     <template id="element" class="card-template">
       <article class="element">
         <img class="element__image">
-        <button class="element__delete"><img src="./images/delete-icon.png" alt="botão em formato de delete"></button>
+        <button class="element__delete"><img src="<%=require('./images/delete-icon.png')%>" alt="botão em formato de delete"></button>
         <div class="element__text">
           <h3 class="element__title"></h3>
-          <button class="element__button"><img src="./images/like-button.svg" alt="Símbolo de curtir no formato de coração."></button>
+          <button class="element__button"><img src="<%=require('./images/like-button.svg')%>" alt="Símbolo de curtir no formato de coração."></button>
         </div>
       </article>
     </template>
