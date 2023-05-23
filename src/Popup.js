@@ -8,11 +8,11 @@ export class Popup {
   }
 
   open() {
-    this.selector.classList.add('modal_opened');
+    this.selector.classList.add('modal-opened');
   }
 
   close () {
-    this.selector.classList.remove('modal_opened');
+    this.selector.classList.remove('modal-opened');
   }
 
   //fecha modal qnd aperto esc
@@ -20,8 +20,6 @@ export class Popup {
     this.close()
     
     page.classList.remove('page_opacity');
-    
-    //modalImage.classList.remove('modal-image__active');
     
   }
 

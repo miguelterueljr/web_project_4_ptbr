@@ -10,13 +10,10 @@ import tahoeLake from "./images/tahoe-lake.webp";
 
 import {Card} from "./Card.js"
 import { togglePageOpacity, handleProfileFormSubmit } from "./utils.js";
+//aqui importo para que ocorra a validacao do meu formulario, se eu deletar para de validar
 import { FormValidator } from "./FormValidator.js";
-import { UserInfo } from "./UserInfo.js";
-import { Popup } from "./Popup.js";
 import { Section } from "./Section.js";
-import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
-
 
 const editButton = document.querySelector('.button-edit'); 
 const modal = document.querySelector('.modal'); 
@@ -27,8 +24,6 @@ const buttonCreateCard = document.querySelector('.modal__button-create');
 const modalImage = document.querySelector('.modal-image');
 const openModal = new PopupWithForm('.modal', handleProfileFormSubmit);
 const openModalAdd = new PopupWithForm('.modal-add', handleProfileFormSubmit);
-
-
 
 //Faz modal do edit abrir
 editButton.addEventListener('click', () => {
