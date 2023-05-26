@@ -9,7 +9,8 @@ import statueOfLiberty from "./images/statue-of-liberty.jpg";
 import tahoeLake from "./images/tahoe-lake.webp";
 
 import {Card} from "./Card.js"
-import { togglePageOpacity, handleProfileFormSubmit } from "./utils.js";
+import { togglePageOpacity } from "./utils.js";
+import { handleProfileFormSubmit } from "./UserInfo";
 //aqui importo para que ocorra a validacao do meu formulario, se eu deletar para de validar
 import { FormValidator } from "./FormValidator.js";
 import { Section } from "./Section.js";
