@@ -26,5 +26,3 @@ Neste projeto foram utilizadas as seguintes tecnologias para desenvolvimento:
 * CSS3 - Flexbox, Position.
 * JavaScript
 
-**Site**
-* [Link para acessar o site](https://miguelterueljr.github.io/web_project_4_ptbr/)
