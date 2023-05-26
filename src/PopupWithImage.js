@@ -9,5 +9,9 @@ export class PopupWithImage extends Popup {
     this.selector.classList.add('modal-image__active');  
   }
 
+  close() {
+    this.selector.classList.remove('modal-image__active');
+  }
+
 }
 

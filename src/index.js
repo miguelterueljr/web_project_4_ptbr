@@ -14,6 +14,7 @@ import { togglePageOpacity, handleProfileFormSubmit } from "./utils.js";
 import { FormValidator } from "./FormValidator.js";
 import { Section } from "./Section.js";
 import { PopupWithForm } from "./PopupWithForm.js";
+import { PopupWithImage } from "./PopupWithImage";
 
 const editButton = document.querySelector('.button-edit'); 
 const modal = document.querySelector('.modal'); 
@@ -24,6 +25,7 @@ const buttonCreateCard = document.querySelector('.modal__button-create');
 const modalImage = document.querySelector('.modal-image');
 const openModal = new PopupWithForm('.modal', handleProfileFormSubmit);
 const openModalAdd = new PopupWithForm('.modal-add', handleProfileFormSubmit);
+const openModalImage = new PopupWithImage('.modal-image');
 
 //Faz modal do edit abrir
 editButton.addEventListener('click', () => {
@@ -131,6 +133,7 @@ document.addEventListener('keydown', (evt) => {
   if (evt.key === "Escape") {
     openModal._handleEscClose();
     openModalAdd._handleEscClose();
+    openModalImage.close();
   }
 });
 
@@ -138,5 +141,20 @@ document.addEventListener('keydown', (evt) => {
 page.addEventListener('mouseup', (evt) => {
   openModal.setEventListeners();
   openModalAdd.setEventListeners();
+  openModalImage.close();
 });
+
+const removeEventListeners = () => {
+  editButton.removeEventListener('click', handleEditButtonClick);
+  closeButton.removeEventListener('click', handleCloseButtonClick);
+  addButton.removeEventListener('click', handleAddButtonClick);
+  buttonCloseAdd.removeEventListener('click', handleButtonCloseAddClick);
+  formElement.removeEventListener('submit', handleFormSubmit);
+  modalFormAdd.removeEventListener('submit', handleModalFormAddSubmit);
+  document.removeEventListener('keydown', handleDocumentKeyDown);
+  page.removeEventListener('mouseup', handlePageMouseUp);
+};
+
+// Chamando a função para remover os eventListeners
+removeEventListeners();
 
