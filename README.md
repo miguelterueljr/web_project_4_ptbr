@@ -27,5 +27,5 @@ Neste projeto foram utilizadas as seguintes tecnologias para desenvolvimento:
 * JavaScript
 
 **Link para o projeto**
-![Acesse](./src/images/page_preview.png)
+![Acesse](https://miguelterueljr.github.io/web_project_4_ptbr)
 
