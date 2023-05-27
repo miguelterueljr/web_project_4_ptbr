@@ -11,6 +11,7 @@ export class FormValidator {
 
     inputElement.classList.add('modal__input_type_error');
 
+    //coloca minha mensagem padrao, o idioma depende com a configuracao do SO.
     errorElement.textContent = errorMessage;
     errorElement.classList.add('modal__input-error_active');
   }
@@ -74,10 +75,4 @@ export class FormValidator {
   }
 }
 
-// Instancia a classe FormValidator para cada formulário encontrado na página
-const formList = Array.from(document.querySelectorAll('.modal__form'));
 
-formList.forEach((form) => {
-  const validator = new FormValidator(form);
-  validator.enableValidation();
-});

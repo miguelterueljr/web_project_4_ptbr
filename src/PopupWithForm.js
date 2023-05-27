@@ -1,4 +1,3 @@
-import { page } from "./index.js";
 import { Popup } from "./Popup.js";
 
 export class PopupWithForm extends Popup {
@@ -20,11 +19,6 @@ export class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this.form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      this.submitCallback(this._getInputValues());
-      this.close();
-    });
     this.closeButton.addEventListener('click', () => {
       this.close();
     });

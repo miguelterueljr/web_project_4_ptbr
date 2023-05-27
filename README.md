@@ -16,7 +16,7 @@ Divirta-se com JavaScript!
 
 
 **Imagens**
-![Imagem do Projeto](./images/page_preview.png)
+![Imagem do Projeto](./src/images/page_preview.png)
   
 
 **Tecnologias Utilizadas**
@@ -25,4 +25,7 @@ Neste projeto foram utilizadas as seguintes tecnologias para desenvolvimento:
 * HTML 5 
 * CSS3 - Flexbox, Position.
 * JavaScript
+
+**Link para o projeto**
+![Acesse](./src/images/page_preview.png)
 

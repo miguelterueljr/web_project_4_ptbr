@@ -5,7 +5,6 @@ const modalImgElement = document.querySelector('.modal-image__image');
 const btnClose = document.querySelector('.modal-image__button');
 const modalTitle = document.querySelector('.modal-image__title');
 const page = document.querySelector('.page');
-
 const popupWithImage = new PopupWithImage('.modal-image');
 
 export class Card {
