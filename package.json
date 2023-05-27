@@ -1,11 +1,16 @@
 {
   "name": "web_project_4_ptbr",
   "version": "1.0.0",
+  "repository": {
+    "url": "git+https://github.com/{miguelterueljr}/{web_project_4_ptbr}.git"
+  },
   "description": "Este projeto foi criado com a finalidade de desenvolvimento de habilidades Front-END, neles são utilizadas algumas das stacks mais utilizadas atualmente no desenvolvimento web, como HTML5, CSS e JavaScript. Além do uso da ferramenta de design Figma.",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "webpack serve"
+    "dev": "webpack serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +23,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.4",
     "cssnano": "^6.0.1",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.1",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss-loader": "^7.3.0",
