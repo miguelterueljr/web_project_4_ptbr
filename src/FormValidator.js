@@ -3,36 +3,41 @@ export class FormValidator {
     this.form = form;
     this.inputList = Array.from(form.querySelectorAll('.modal__input'));
     this.buttonElement = form.querySelector('.modal__button');
+    this.errorMessages = {
+      valueMissing: 'Campo é obrigatório.',
+      typeMismatch: 'Por favor, insira um endereço web',
+      tooShort: 'Aumente esse texto para 2 caracteres ou mais.',
+    };
   }
 
   // Função que mostra elemento de erro
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this.form.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this.form.querySelector(`.${inputElement.id}-error`); 
 
-    inputElement.classList.add('modal__input_type_error');
+    inputElement.classList.add('modal__input_type_error'); 
 
-    //coloca minha mensagem padrao, o idioma depende com a configuracao do SO.
-    errorElement.textContent = errorMessage;
-    errorElement.classList.add('modal__input-error_active');
+    errorElement.textContent = errorMessage; 
+    errorElement.classList.add('modal__input-error_active'); 
   }
 
   // Função que oculda elemento de erro
   _hideInputError(inputElement) {
-    const errorElement = this.form.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this.form.querySelector(`.${inputElement.id}-error`); 
 
-    inputElement.classList.remove('modal__input_type_error');
+    inputElement.classList.remove('modal__input_type_error'); 
 
-    errorElement.classList.remove('modal__input-error_active');
-    errorElement.textContent = '';
+    errorElement.classList.remove('modal__input-error_active'); 
+    errorElement.textContent = ''; 
   }
 
   // Função verifica se o campo é valido
   _isValid(inputElement) {
-    if(!inputElement.validity.valid) {
-      this._showInputError(inputElement, inputElement.validationMessage);
-    } else {
-      this._hideInputError(inputElement);
-    };
+    if (!inputElement.validity.valid) { 
+      const errorMessage = Object.keys(this.errorMessages).find(errorKey => inputElement.validity[errorKey]);
+      this._showInputError(inputElement, errorMessage ? this.errorMessages[errorMessage] : 'Erro desconhecido.');
+    } else { 
+      this._hideInputError(inputElement); 
+    }
   }
 
   // Função para ativar o desativar meu botao dependendo da valdiacao do formulario
@@ -72,6 +77,14 @@ export class FormValidator {
     });
 
     this._setEventListeners();
+  }
+
+  //método que faz o formulario resetar sua validação
+  resetValidation() {
+    this.inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+    this._toggleButtonState();
   }
 }
 

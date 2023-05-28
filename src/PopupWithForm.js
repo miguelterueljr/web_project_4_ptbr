@@ -1,4 +1,5 @@
 import { Popup } from "./Popup.js";
+import { FormValidator } from "./FormValidator.js";
 
 export class PopupWithForm extends Popup {
   constructor(selector, submitCallback) {
@@ -6,6 +7,7 @@ export class PopupWithForm extends Popup {
     this.submitCallback = submitCallback;
     this.form = this.selector.querySelector('.modal__form');
     this.closeButton = this.selector.querySelector('.modal__button-close');
+    this.formValidator = new FormValidator(this.form);
   }
 
   _getInputValues() {
@@ -15,6 +17,11 @@ export class PopupWithForm extends Popup {
       formValues[input.name] = input.value;
     });
     return formValues;
+  }
+
+  open() {
+    super.open();
+    this.formValidator.resetValidation(); //metodo que faz com que toda vez que abrir o modal eu resetar a validação
   }
 
   setEventListeners() {

@@ -11,9 +11,6 @@ export class UserInfo {
 
   // método público que retorna um objeto com informações sobre o usuário
   getUserInfo() {
-    // atualiza os placeholders dos campos de entrada e retorna um objeto com o nome e a profissão do usuário
-    this.nameInput.placeholder = this.nameInput.value;
-    this.jobInput.placeholder = this.jobInput.value;
     return {
       name: this.nameInput.value,
       job: this.jobInput.value
