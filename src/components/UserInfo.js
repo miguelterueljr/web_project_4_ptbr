@@ -1,4 +1,4 @@
-import { nameInput, jobInput, nameField, jobField } from "./utils";
+import { nameInput, jobInput, nameField, jobField } from "../utils/utils.js";
 
 // classe UserInfo, responsável por renderizar a informação sobre o usuário na página
 export class UserInfo {

@@ -34,7 +34,7 @@ export class FormValidator {
   _isValid(inputElement) {
     if (!inputElement.validity.valid) { 
       const errorMessage = Object.keys(this.errorMessages).find(errorKey => inputElement.validity[errorKey]);
-      this._showInputError(inputElement, errorMessage ? this.errorMessages[errorMessage] : 'Erro desconhecido.');
+      this._showInputError(inputElement, errorMessage ? this.errorMessages[errorMessage] : 'Verifique os campos digitados.');
     } else { 
       this._hideInputError(inputElement); 
     }

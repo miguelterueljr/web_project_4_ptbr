@@ -1,4 +1,4 @@
-import { PopupWithImage } from "./PopupWithImage.js";
+import { PopupWithImage } from "./PopupWithImage";
 
 const modalImage = document.querySelector('.modal-image');
 const modalImgElement = document.querySelector('.modal-image__image');

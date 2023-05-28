@@ -6,13 +6,13 @@ import grandCanyon from "../images/grand-canyon.jpg"
 import miami from "../images/miami.jpg"
 import statueOfLiberty from "../images/statue-of-liberty.jpg";
 import tahoeLake from "../images/tahoe-lake.webp";
-import { Card } from "../Card.js"
-import { togglePageOpacity } from "../utils.js";
-import { handleProfileFormSubmit } from "../UserInfo";
-import { FormValidator } from "../FormValidator.js";
-import { Section } from "../Section.js";
-import { PopupWithForm } from "../PopupWithForm.js";
-import { PopupWithImage } from "../PopupWithImage";
+import { Card } from "../components/Card";
+import { togglePageOpacity } from "../utils/utils.js";
+import { handleProfileFormSubmit } from "../components/UserInfo";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage";
 
 const editButton = document.querySelector('.button-edit');
 const closeButton = document.querySelector('.modal__button-close');
