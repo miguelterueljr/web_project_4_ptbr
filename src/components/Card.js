@@ -38,8 +38,9 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__button').addEventListener('click', (evt) => {
+    this._element.querySelector('.element__button_image').addEventListener('click', (evt) => {
       evt.target.classList.toggle('element__button_active');
+      
     });
 
     this._element.querySelector('.element__delete').addEventListener('click', () => {
