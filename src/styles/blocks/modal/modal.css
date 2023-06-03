@@ -11,19 +11,23 @@
 .modal {
   width: 470px; /*Na verdade o bloco branco tem 430, porem mais 40 de cada lado para fazer o x ficar ao lado*/
   height: 390px;
-
   /*faz o modal se nao for chamado ficar escondido*/
   visibility: hidden;
-  
   position: fixed;
   top: 50%;
   left: 50%;
   /*faz com que o conteudo fique centralizado*/
   transform: translate(-50%, -50%);
-
-  display: flex; /*aqui era flex*/
+  display: flex; 
   flex-direction: column;
   z-index: 2;  
+}
+
+.modal_delete {
+  display: flex;
+  visibility: visible;
+  width: 470px;
+  height: 228px;
 }
 
 

@@ -6,6 +6,7 @@ const btnClose = document.querySelector('.modal-image__button');
 const modalTitle = document.querySelector('.modal-image__title');
 const page = document.querySelector('.page');
 const popupWithImage = new PopupWithImage('.modal-image');
+const modalDelete = document.querySelector('.modal-delete')
 
 export class Card {
   constructor(imageLink, imageTitle) {
@@ -44,7 +45,11 @@ export class Card {
     });
 
     this._element.querySelector('.element__delete').addEventListener('click', () => {
-      this._element.remove();
+      
+      console.log('teste')
+
+      modalDelete.classList.add('modal_delete')
+      //this._element.remove(); // aqui removia o card quando clicava no botao de delete, pensar nessa funcao
     });
 
     this._element.querySelector('.element__image').addEventListener('click', this.handleClick.bind(this));

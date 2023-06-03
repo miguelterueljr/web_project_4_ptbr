@@ -42,14 +42,15 @@ function fetchInitialCards() {
 
 fetchInitialCards();
 
-
-
 const editButton = document.querySelector('.button-edit');
 const closeButton = document.querySelector('.modal__button-close');
 export const page = document.querySelector('.page');
 const openModal = new PopupWithForm('.modal', handleProfileFormSubmit);
 const openModalAdd = new PopupWithForm('.modal-add', handleProfileFormSubmit);
 const openModalImage = new PopupWithImage('.modal-image');
+const modalDelete = document.querySelector('.modal_delete')
+
+
 
 editButton.addEventListener('click', () => {
   togglePageOpacity(page);
