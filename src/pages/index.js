@@ -38,9 +38,9 @@ function fetchInitialCards() {
       // Renderiza os cards na página
       cardList.render();
     });
-}
+};
 
-fetchInitialCards()
+fetchInitialCards();
 
 
 
