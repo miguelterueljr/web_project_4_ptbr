@@ -1,11 +1,4 @@
-import "./index.css"
-
-import dallas from "../images/dallas-airport.jpg";
-import golden from "../images/golden-gate.png"
-import grandCanyon from "../images/grand-canyon.jpg"
-import miami from "../images/miami.jpg"
-import statueOfLiberty from "../images/statue-of-liberty.jpg";
-import tahoeLake from "../images/tahoe-lake.webp";
+import "./index.css";
 import { Card } from "../components/Card";
 import { togglePageOpacity } from "../utils/utils.js";
 import { handleProfileFormSubmit } from "../components/UserInfo";
@@ -13,6 +6,43 @@ import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage";
+import { Api } from "../components/api";
+
+//aqui pego da api meu id, ainda vou desenvolver
+fetch("https://around.nomoreparties.co/v1/web_ptbr_04/users/me", {
+  headers: {
+    authorization: "85c06b76-d1bb-40cc-b9fa-fda6b61002da"
+  }
+})
+.then(res => res.json())
+.then((result) => {
+  console.log(result); 
+}); 
+
+const initialCards = []; // Inicializa a variável initialCards como um array vazio, sera preenchido pelos dados da API
+
+// Função para pegar cards iniciais do servidor
+function fetchInitialCards() {
+  fetch("https://around.nomoreparties.co/v1/web_ptbr_04/cards ", {
+    headers: {
+      authorization: "85c06b76-d1bb-40cc-b9fa-fda6b61002da"
+    }
+  })
+    .then(res => res.json())
+    .then((res) => {
+      // Atualize a variável initialCards diretamente com os valores da API
+      res.forEach(item => {
+        initialCards.push({ name: item.name, link: item.link });
+      });
+
+      // Renderiza os cards na página
+      cardList.render();
+    });
+}
+
+fetchInitialCards()
+
+
 
 const editButton = document.querySelector('.button-edit');
 const closeButton = document.querySelector('.modal__button-close');
@@ -52,32 +82,7 @@ formElement.addEventListener('submit', (evt) => {
   togglePageOpacity(page);
 });
 
-const initialCards = [
-  {
-    name: "Grand Kanyon",
-    link: grandCanyon
-  },
-  {
-    name: "Dallas Airport",
-    link: dallas
-  },
-  {
-    name: "Golden Gate",
-    link: golden
-  },
-  {
-    name: "Miami",
-    link: miami
-  },
-  {
-    name: "Statue of Liberty",
-    link: statueOfLiberty
-  },
-  {
-    name: "Lake Tahoe",
-    link: tahoeLake
-  }
-]
+
 
 const cardList = new Section(
   {
@@ -90,8 +95,6 @@ const cardList = new Section(
   },
   '.elements'
 );
-
-cardList.render();
 
 const modalFormAdd = document.querySelector('.modal-add');
 const formAddImage = document.querySelector('.modal__form_add');
