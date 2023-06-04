@@ -8,6 +8,12 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage";
 import { Api } from "../components/api";
 
+import { initializePage } from "../components/UserInfo";
+
+
+// Chama a função de inicialização da página quando a página for carregada
+window.addEventListener("DOMContentLoaded", initializePage);
+
 //aqui pego da api meu id, ainda vou desenvolver
 fetch("https://around.nomoreparties.co/v1/web_ptbr_04/users/me", {
   headers: {
@@ -30,7 +36,7 @@ function fetchInitialCards() {
   })
     .then(res => res.json())
     .then((res) => {
-      // Atualize a variável initialCards diretamente com os valores da API
+      // Atualize a variável initialCards diretamente com os valores da API, faz um forEach em cada elemento e assim pegar somente as propriedades name e item
       res.forEach(item => {
         initialCards.push({ name: item.name, link: item.link });
       });
@@ -41,6 +47,7 @@ function fetchInitialCards() {
 };
 
 fetchInitialCards();
+
 
 const editButton = document.querySelector('.button-edit');
 const closeButton = document.querySelector('.modal__button-close');

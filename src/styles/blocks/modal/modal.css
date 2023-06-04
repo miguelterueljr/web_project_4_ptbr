@@ -30,6 +30,12 @@
   height: 228px;
 }
 
+/*modal do edit photo*/
+.modal-edit-photo {
+  visibility: hidden;
+  height: 272px;
+}
+
 
 
 

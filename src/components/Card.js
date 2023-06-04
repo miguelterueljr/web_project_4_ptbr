@@ -49,6 +49,7 @@ export class Card {
       console.log('teste')
 
       modalDelete.classList.add('modal_delete')
+      page.classList.add('page_opacity')
       //this._element.remove(); // aqui removia o card quando clicava no botao de delete, pensar nessa funcao
     });
 
