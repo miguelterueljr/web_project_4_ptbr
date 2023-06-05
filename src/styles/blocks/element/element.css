@@ -6,3 +6,12 @@
   position: relative;
 }
 
+.element__number{
+  text-align: center;
+  font-family: 'inter', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 0.8125rem; /*13px*/
+  line-height: 15.73px;
+  visibility: hidden;
+}
+

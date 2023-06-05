@@ -118,7 +118,10 @@
         <button class="element__delete"><img src="<%=require('./images/delete-icon.png')%>" alt="botão em formato de delete"></button>
         <div class="element__text">
           <h3 class="element__title"></h3>
-          <button class="element__button"><img src="<%=require('./images/like-button.svg')%>" alt="Símbolo de curtir no formato de coração." class="element__button_image"></button>
+          <div class="element__text_liked">
+            <button class="element__button"><img src="<%=require('./images/like-button.svg')%>" alt="Símbolo de curtir no formato de coração." class="element__button_image"></button>
+            <p class="element__number">0</p>
+          </div>
         </div>
       </article>
     </template>

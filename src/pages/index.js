@@ -7,11 +7,10 @@ import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage";
 import { Api } from "../components/api";
-
 import { initializePage } from "../components/UserInfo";
 
 
-// Chama a função de inicialização da página quando a página for carregada
+// Chama a função de inicialização da página quando a página for carregada, responsavel por carregar os dados do profile do servidor
 window.addEventListener("DOMContentLoaded", initializePage);
 
 //aqui pego da api meu id, ainda vou desenvolver
@@ -39,14 +38,23 @@ function fetchInitialCards() {
       // Atualize a variável initialCards diretamente com os valores da API, faz um forEach em cada elemento e assim pegar somente as propriedades name e item
       res.forEach(item => {
         initialCards.push({ name: item.name, link: item.link });
+        //console.log(item._id === "647c69bcb78aee07844e7a37");
       });
 
       // Renderiza os cards na página
       cardList.render();
+      console.log(res)
+      
     });
 };
-
 fetchInitialCards();
+
+//funcao para criar o icone de deleteButton, sera usada caso seja o dono do card
+function showDeleteButton() {
+  
+  const deleteButton = document.querySelector('.element__delete');
+  deleteButton.classList.add('element__delete_active')
+}
 
 
 const editButton = document.querySelector('.button-edit');
@@ -99,9 +107,12 @@ const cardList = new Section(
       const card = new Card(item.link, item.name);
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
+      console.log('testando')
+      console.log(card)
     }
   },
   '.elements'
+  
 );
 
 const modalFormAdd = document.querySelector('.modal-add');
@@ -112,10 +123,12 @@ modalFormAdd.addEventListener('submit', (evt) => {
   const imageName = document.querySelector('.modal__input_title');
   const imageLink = document.querySelector('.modal__input_link');
   const card = new Card(imageLink.value, imageName.value);
+  card.addCardToServer();
   const cardElement = card.generateCard();
   document.querySelector('.elements').prepend(cardElement);
   openModalAdd.close();
   togglePageOpacity(page);
+
 
   formAddImage.reset()
 });
@@ -198,3 +211,6 @@ formList.forEach((form) => {
   const validator = new FormValidator(form);
   validator.enableValidation();
 });
+
+
+

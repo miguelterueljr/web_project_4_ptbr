@@ -6,7 +6,8 @@ const btnClose = document.querySelector('.modal-image__button');
 const modalTitle = document.querySelector('.modal-image__title');
 const page = document.querySelector('.page');
 const popupWithImage = new PopupWithImage('.modal-image');
-const modalDelete = document.querySelector('.modal-delete')
+const modalDelete = document.querySelector('.modal-delete');
+const deleteButton = document.querySelector('.element__delete');
 
 export class Card {
   constructor(imageLink, imageTitle) {
@@ -42,12 +43,11 @@ export class Card {
     this._element.querySelector('.element__button_image').addEventListener('click', (evt) => {
       evt.target.classList.toggle('element__button_active');
       
+
+      
     });
 
     this._element.querySelector('.element__delete').addEventListener('click', () => {
-      
-      console.log('teste')
-
       modalDelete.classList.add('modal_delete')
       page.classList.add('page_opacity')
       //this._element.remove(); // aqui removia o card quando clicava no botao de delete, pensar nessa funcao
@@ -68,4 +68,31 @@ export class Card {
 
     return this._element;
   }
+
+  addCardToServer() {
+    const cardData = {
+      name: this._imageTitle,
+      link: this._imageLink
+    };
+  
+    fetch('https://around.nomoreparties.co/v1/web_ptbr_04/cards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: "85c06b76-d1bb-40cc-b9fa-fda6b61002da"
+      },
+      body: JSON.stringify(cardData)
+    })
+    .then(response => response.json())
+    .then(newCard => {
+      // Handle the response and do something with the new card data
+      console.log(newCard);
+    })
+    .catch(error => {
+      // Handle any errors that occur during the request
+      console.error('Error:', error);
+    });
+  }
 }
+
+

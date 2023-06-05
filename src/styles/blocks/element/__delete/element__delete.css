@@ -5,6 +5,11 @@
     right: 16.28px;
     background-color: transparent;
     border: none;
+    visibility: hidden;
+  }
+
+  .element__delete_active {
+    visibility: visible;
   }
 
   .element__delete:hover {
