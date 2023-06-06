@@ -11,7 +11,11 @@ import { initializePage } from "../components/UserInfo";
 
 
 // Chama a função de inicialização da página quando a página for carregada, responsavel por carregar os dados do profile do servidor
-window.addEventListener("DOMContentLoaded", initializePage);
+window.addEventListener("DOMContentLoaded", () => {
+  initializePage();
+
+
+});
 
 //aqui pego da api meu id, ainda vou desenvolver
 fetch("https://around.nomoreparties.co/v1/web_ptbr_04/users/me", {
@@ -27,35 +31,39 @@ fetch("https://around.nomoreparties.co/v1/web_ptbr_04/users/me", {
 const initialCards = []; // Inicializa a variável initialCards como um array vazio, sera preenchido pelos dados da API
 
 // Função para pegar cards iniciais do servidor
+// Função para pegar cards iniciais do servidor
 function fetchInitialCards() {
-  fetch("https://around.nomoreparties.co/v1/web_ptbr_04/cards ", {
+  fetch("https://around.nomoreparties.co/v1/web_ptbr_04/cards", {
     headers: {
       authorization: "85c06b76-d1bb-40cc-b9fa-fda6b61002da"
     }
   })
     .then(res => res.json())
     .then((res) => {
-      // Atualize a variável initialCards diretamente com os valores da API, faz um forEach em cada elemento e assim pegar somente as propriedades name e item
-      res.forEach(item => {
-        initialCards.push({ name: item.name, link: item.link });
-        //console.log(item._id === "647c69bcb78aee07844e7a37");
+      initialCards.push(...res);
+
+      res.forEach((item) => {
+        if (item.owner._id === "436e74c115dfe006750ac205") {
+          setTimeout(() => showDeleteButton(), 200);
+        }
       });
 
-      // Renderiza os cards na página
       cardList.render();
-      console.log(res)
-      
     });
-};
+}
+
+
 fetchInitialCards();
+console.log(initialCards)
 
 //funcao para criar o icone de deleteButton, sera usada caso seja o dono do card
 function showDeleteButton() {
-  
+  console.log('tesstando para ver o numero de ocorrencias com meu id, existem 2 cards que eu enviei deve retornar 2')
   const deleteButton = document.querySelector('.element__delete');
   deleteButton.classList.add('element__delete_active')
-}
 
+  
+}
 
 const editButton = document.querySelector('.button-edit');
 const closeButton = document.querySelector('.modal__button-close');
@@ -107,8 +115,6 @@ const cardList = new Section(
       const card = new Card(item.link, item.name);
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
-      console.log('testando')
-      console.log(card)
     }
   },
   '.elements'
