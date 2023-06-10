@@ -10,11 +10,12 @@ const modalDelete = document.querySelector('.modal-delete');
 const deleteButton = document.querySelector('.element__delete');
 
 export class Card {
-  constructor(imageLink, imageTitle) {
+  constructor(imageLink, imageTitle, owner) {
     this._imageLink = imageLink;
     this._imageTitle = imageTitle;
     this._element = this._getTemplate();
     this._setEventListeners();
+    this._owner = owner;
   }
 
   _getTemplate() {
@@ -41,10 +42,7 @@ export class Card {
 
   _setEventListeners() {
     this._element.querySelector('.element__button_image').addEventListener('click', (evt) => {
-      evt.target.classList.toggle('element__button_active');
-      
-
-      
+      evt.target.classList.toggle('element__button_active');      
     });
 
     this._element.querySelector('.element__delete').addEventListener('click', () => {
@@ -60,11 +58,14 @@ export class Card {
       page.classList.remove('page_opacity');
     });
   }
+  
 
   generateCard() {
     this._element.querySelector('.element__image').alt = `Card contendo a foto e o titulo de ${this._imageTitle}`;
     this._element.querySelector('.element__image').src = this._imageLink;
     this._element.querySelector('.element__title').textContent = this._imageTitle;
+    //console.log(this._owner);
+    this._element.querySelector('.element__delete').dataset.cardId = this._owner._id; // Adiciona o ID como atributo de dados
 
     return this._element;
   }

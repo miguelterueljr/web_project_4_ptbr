@@ -9,15 +9,12 @@ import { PopupWithImage } from "../components/PopupWithImage";
 import { Api } from "../components/api";
 import { initializePage } from "../components/UserInfo";
 
-
-// Chama a função de inicialização da página quando a página for carregada, responsavel por carregar os dados do profile do servidor
+// Chama a função de inicialização da página quando a página for carregada, responsável por carregar os dados do profile do servidor
 window.addEventListener("DOMContentLoaded", () => {
   initializePage();
-
-
 });
 
-//aqui pego da api meu id, ainda vou desenvolver
+// Aqui pego da API meu id, ainda vou desenvolver
 fetch("https://around.nomoreparties.co/v1/web_ptbr_04/users/me", {
   headers: {
     authorization: "85c06b76-d1bb-40cc-b9fa-fda6b61002da"
@@ -25,12 +22,11 @@ fetch("https://around.nomoreparties.co/v1/web_ptbr_04/users/me", {
 })
 .then(res => res.json())
 .then((result) => {
-  console.log(result); 
+ console.log(result); 
 }); 
 
-const initialCards = []; // Inicializa a variável initialCards como um array vazio, sera preenchido pelos dados da API
+const initialCards = []; // Inicializa a variável initialCards como um array vazio, será preenchido pelos dados da API
 
-// Função para pegar cards iniciais do servidor
 // Função para pegar cards iniciais do servidor
 function fetchInitialCards() {
   fetch("https://around.nomoreparties.co/v1/web_ptbr_04/cards", {
@@ -41,28 +37,28 @@ function fetchInitialCards() {
     .then(res => res.json())
     .then((res) => {
       initialCards.push(...res);
-
+      
       res.forEach((item) => {
         if (item.owner._id === "436e74c115dfe006750ac205") {
-          setTimeout(() => showDeleteButton(), 200);
+          //coloquei tempo para atrasar a execucao da funcao, senao o card nao é renderizado no momento da execucao dessa funcao e da erro.
+          setTimeout (() => showDeleteButton(), 100);
         }
       });
-
       cardList.render();
     });
 }
 
-
 fetchInitialCards();
 console.log(initialCards)
 
-//funcao para criar o icone de deleteButton, sera usada caso seja o dono do card
 function showDeleteButton() {
-  console.log('tesstando para ver o numero de ocorrencias com meu id, existem 2 cards que eu enviei deve retornar 2')
-  const deleteButton = document.querySelector('.element__delete');
-  deleteButton.classList.add('element__delete_active')
-
-  
+  const deleteButton = document.querySelectorAll('.element__delete')
+  deleteButton.forEach((item) => {
+    const cardId = item.dataset.cardId;
+    if (cardId === "436e74c115dfe006750ac205") {
+      item.classList.add('element__delete_active')
+    }
+  })
 }
 
 const editButton = document.querySelector('.button-edit');
@@ -72,8 +68,6 @@ const openModal = new PopupWithForm('.modal', handleProfileFormSubmit);
 const openModalAdd = new PopupWithForm('.modal-add', handleProfileFormSubmit);
 const openModalImage = new PopupWithImage('.modal-image');
 const modalDelete = document.querySelector('.modal_delete')
-
-
 
 editButton.addEventListener('click', () => {
   togglePageOpacity(page);
@@ -106,19 +100,16 @@ formElement.addEventListener('submit', (evt) => {
   togglePageOpacity(page);
 });
 
-
-
 const cardList = new Section(
   {
     items: initialCards,
     renderer: item => {
-      const card = new Card(item.link, item.name);
+      const card = new Card(item.link, item.name, item.owner);
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
     }
   },
   '.elements'
-  
 );
 
 const modalFormAdd = document.querySelector('.modal-add');
@@ -134,9 +125,7 @@ modalFormAdd.addEventListener('submit', (evt) => {
   document.querySelector('.elements').prepend(cardElement);
   openModalAdd.close();
   togglePageOpacity(page);
-
-
-  formAddImage.reset()
+  formAddImage.reset();
 });
 
 document.addEventListener('keydown', (evt) => {
@@ -189,7 +178,6 @@ const removeEventListeners = () => {
     document.querySelector('.elements').prepend(cardElement);
     openModalAdd.close();
     togglePageOpacity(page);
-
     formAddImage.reset();
   });
 
@@ -217,6 +205,3 @@ formList.forEach((form) => {
   const validator = new FormValidator(form);
   validator.enableValidation();
 });
-
-
-
