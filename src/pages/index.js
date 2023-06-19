@@ -22,7 +22,7 @@
   })
   .then(res => res.json())
   .then((result) => {
-  console.log(result); 
+    console.log(result); 
   }); 
 
   const initialCards = []; // Inicializa a variável initialCards como um array vazio, será preenchido pelos dados da API
@@ -48,7 +48,11 @@
 
         //itero e vejo a propriedade de id de cada item do array initialCards
         initialCards.forEach((item) => {
-          console.log(item._id)
+          console.log(item.likes.length)
+
+          console.log(item.likes)
+          console.log(item)
+          console.log('---------')
         })
       });
   }
@@ -110,7 +114,7 @@
     {
       items: initialCards,
       renderer: item => {
-        const card = new Card(item.link, item.name, item.owner, item._id);
+        const card = new Card(item.link, item.name, item.owner, item._id, item.likes.length);
         const cardElement = card.generateCard();
         cardList.addItem(cardElement);
       }
@@ -213,3 +217,45 @@
     validator.enableValidation();
   });
 
+  //abrir modal para editar photo do perfil
+  const showModalEditPhoto = document.querySelector('.profile__image_overlay')
+  const showModalEdit = document.querySelector('.modal_photo');
+  showModalEditPhoto.addEventListener('click', () => {const showModalEdit = document.querySelector('.modal_photo');
+    showModalEdit.classList.add('modal-photo')
+    page.classList.add('page_opacity');
+  });
+
+  //fechar modal de editar photo do perfil
+  const closeModalPhoto = document.querySelector('.button-close-photo');
+  closeModalPhoto.addEventListener('click', () => {
+    showModalEdit.classList.remove('modal-photo');
+    page.classList.remove('page_opacity');
+  })
+
+//muda foto do perfil na API
+const profilePhoto = document.querySelector('.profile__image')
+function changeProfilePicture(imageUrl) {
+  fetch("https://around.nomoreparties.co/v1/web_ptbr_04/users/me/avatar", {
+      method: "PATCH",
+      headers: {
+        authorization: "85c06b76-d1bb-40cc-b9fa-fda6b61002da",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        avatar: imageUrl
+      })
+    })
+    .then(res => res.json())
+    .then((updatedResult) => {
+      console.log(updatedResult);
+      profilePhoto.src = updatedResult.avatar
+    })
+    .catch((error) => {
+      console.error("Erro ao atualizar o avatar:", error);
+    });
+
+}
+
+//changeProfilePicture('https://img.freepik.com/fotos-gratis/imagem-aproximada-da-cabeca-de-um-lindo-leao_181624-35855.jpg');
+
+//preciso fazer agora quando submter o formuario para editar a imagem chamar a funcao changeProfilePicture

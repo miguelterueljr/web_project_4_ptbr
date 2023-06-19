@@ -10,14 +10,17 @@ const modalDelete = document.querySelector('.modal-delete');
 const closeButton = document.querySelector('.modal__button-close_close');
 const confirmButton = document.querySelector('.modal__button_confirm');
 
+
 export class Card {
-  constructor(imageLink, imageTitle, owner, idCard) {
+  constructor(imageLink, imageTitle, owner, idCard, numberOfLikes) {
     this._imageLink = imageLink;
     this._imageTitle = imageTitle;
     this._element = this._getTemplate();
     this._setEventListeners();
     this._owner = owner;
     this._id = idCard;
+    this._likesCount = numberOfLikes;
+    this._isLiked = false;
   }
 
   _getTemplate() {
@@ -44,8 +47,13 @@ export class Card {
 
   
   _setEventListeners() {
+    //curtir card
     this._element.querySelector('.element__button_image').addEventListener('click', (evt) => {
       evt.target.classList.toggle('element__button_active');
+      //aqui posso botar uma funcao para enviar o click para meu api e adicionar meus dados ao likes e assim aumentar seu length
+      console.log(evt)
+      this.addLike();
+      
     });
 
     this._element.querySelector('.element__delete').addEventListener('click', () => {
@@ -85,14 +93,14 @@ export class Card {
     this._element.querySelector('.element__title').textContent = this._imageTitle;
     this._element.querySelector('.element__delete').dataset.cardId = this._owner._id; // Adiciona o ID como atributo de dados
     
-    //tenho q dar um jeito desse parametro teste receber o_id de initialCards 
+    //aqui eu colquei um parametro chamado idCard ao meu element__delete e atribui o valor de _id a ele. para saber qual deletar
     this._element.querySelector('.element__delete').dataset.idCard = this._id
-    console.log(this._element)
+    //pego numero de curtidas
+    this._element.querySelector('.element__number').textContent = this._likesCount
+    
     return this._element;
     
   }
-
-  
 
   addCardToServer() {
     const cardData = {
@@ -122,7 +130,7 @@ export class Card {
   
 
 
-  //aqui esta o metodo para remover, nao esta funcionando porque fala q nao tenho autorizacao, nao sei se é outra autorizacao so poderei verificar quando acesso voltar
+  //metodo para deletar o card da api
   deleteCardFromServer() {
     const cardId = this._element.querySelector('.element__delete').dataset.idCard; // ID do card específico
   
@@ -147,5 +155,34 @@ export class Card {
       console.error('Error:', error);
     });
   }
-}  
 
+  addLike() {
+    
+    fetch('https://around.nomoreparties.co/v1/web_ptbr_04/cards/likes/', {
+      method: 'PUT',
+      headers: {
+        authorization: "85c06b76-d1bb-40cc-b9fa-fda6b61002da"
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        // A exclusão foi bem-sucedida
+        console.log('Card deleted from server.');
+        this._element.remove(); // Remova o elemento do DOM
+      } else {
+        // A exclusão falhou
+        console.error('Failed to delete card from server.');
+      }
+    })
+    .catch(error => {
+      // Handle any errors that occur during the request
+      console.error('Error:', error);
+    });
+  }
+}
+
+//preciso alterar a propriedade likes da api adicionando meus dados que estao na requisicao da linha 25 do index.js
+//com isso automaticamente sera adicionado e aumentara minha length
+//com essa logica tenho q tomar cuidado pq quando desclicar eu preciso fazer uma solicitacao delete para remover meus dados e alterar a length diminuindo.
+//eu coloquei meus dados numa variavel chamada myId onde seu conteudo obtive atraves de uma solicitação feita na api
+//porem essa variavel esta no arquivo index.js tenho q fazer sua importação aqui

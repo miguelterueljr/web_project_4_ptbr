@@ -24,9 +24,12 @@
 }
 
 /*modal do edit photo*/
-.modal-edit-photo {
-  visibility: hidden;
-  height: 272px;
+.modal-photo {
+  display: flex;
+  visibility: visible;
+  height: 282px;
+  width: 470px;
+  opacity: 1;
 }
 
 
