@@ -1,5 +1,7 @@
+import { Api } from "./Api";
 import { PopupWithImage } from "./PopupWithImage";
 
+const api = new Api();
 const modalImage = document.querySelector('.modal-image');
 const modalImgElement = document.querySelector('.modal-image__image');
 const btnClose = document.querySelector('.modal-image__button');
@@ -9,7 +11,6 @@ const popupWithImage = new PopupWithImage('.modal-image');
 const modalDelete = document.querySelector('.modal-delete');
 const closeButton = document.querySelector('.modal__button-close_close');
 const confirmButton = document.querySelector('.modal__button_confirm');
-
 
 export class Card {
   constructor(imageLink, imageTitle, owner, idCard, numberOfLikes) {
@@ -45,23 +46,22 @@ export class Card {
     page.classList.add('page_opacity');
   }
 
-  
   _setEventListeners() {
-    //curtir card
     this._element.querySelector('.element__button_image').addEventListener('click', (evt) => {
       evt.target.classList.toggle('element__button_active');
-      //aqui posso botar uma funcao para enviar o click para meu api e adicionar meus dados ao likes e assim aumentar seu length
-      console.log(evt)
-      this.addLike();
-      
+
+      if (evt.target.classList.contains('element__button_active')) {
+        this.addLike();
+      } else {
+        this.removeLike();
+      }
     });
 
     this._element.querySelector('.element__delete').addEventListener('click', () => {
-      
       modalDelete.classList.add('modal_delete');
       page.classList.add('page_opacity');
       confirmButton.addEventListener('click', () => {
-        this._handleDelete()
+        this._handleDelete();
         this.deleteCardFromServer();
       })
     });
@@ -91,15 +91,11 @@ export class Card {
     this._element.querySelector('.element__image').alt = `Card contendo a foto e o titulo de ${this._imageTitle}`;
     this._element.querySelector('.element__image').src = this._imageLink;
     this._element.querySelector('.element__title').textContent = this._imageTitle;
-    this._element.querySelector('.element__delete').dataset.cardId = this._owner._id; // Adiciona o ID como atributo de dados
-    
-    //aqui eu colquei um parametro chamado idCard ao meu element__delete e atribui o valor de _id a ele. para saber qual deletar
-    this._element.querySelector('.element__delete').dataset.idCard = this._id
-    //pego numero de curtidas
-    this._element.querySelector('.element__number').textContent = this._likesCount
-    
+    this._element.querySelector('.element__delete').dataset.cardId = this._owner._id;
+    this._element.querySelector('.element__delete').dataset.idCard = this._id;
+    this._element.querySelector('.element__number').textContent = this._likesCount;
+
     return this._element;
-    
   }
 
   addCardToServer() {
@@ -107,82 +103,53 @@ export class Card {
       name: this._imageTitle,
       link: this._imageLink
     };
-
-    fetch('https://around.nomoreparties.co/v1/web_ptbr_04/cards', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: "85c06b76-d1bb-40cc-b9fa-fda6b61002da"
-      },
-      body: JSON.stringify(cardData)
-    })
-    .then(response => response.json())
-    .then(newCard => {
-      // Handle the response and do something with the new card data
-      console.log(newCard);
-    })
-    .catch(error => {
-      // Handle any errors that occur during the request
-      console.error('Error:', error);
-    });
+  
+    api.addCard(cardData)
+      .then((createdCard) => {
+        console.log('Card added to server:', createdCard);
+      })
+      .catch((error) => {
+        console.error('Failed to add card to server:', error);
+      });
   }
 
-  
-
-
-  //metodo para deletar o card da api
   deleteCardFromServer() {
-    const cardId = this._element.querySelector('.element__delete').dataset.idCard; // ID do card específico
+    const cardId = this._element.querySelector('.element__delete').dataset.idCard;
   
-    fetch(`https://around.nomoreparties.co/v1/web_ptbr_04/cards/${cardId}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: "85c06b76-d1bb-40cc-b9fa-fda6b61002da"
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        // A exclusão foi bem-sucedida
-        console.log('Card deleted from server.');
-        this._element.remove(); // Remova o elemento do DOM
-      } else {
-        // A exclusão falhou
-        console.error('Failed to delete card from server.');
-      }
-    })
-    .catch(error => {
-      // Handle any errors that occur during the request
-      console.error('Error:', error);
-    });
+    api.deleteCard(cardId)
+      .then(response => {
+        if (response.ok) {
+          console.log('Card deleted from server.');
+          this._element.remove();
+        } else {
+          console.error('Failed to delete card from server:', response.status, response.statusText);
+        }
+        confirmButton.removeEventListener('click', this._handleDelete);
+      })
+      .catch((error) => {
+        console.error('Failed to delete card from server:', error);
+      });
   }
 
   addLike() {
-    
-    fetch('https://around.nomoreparties.co/v1/web_ptbr_04/cards/likes/', {
-      method: 'PUT',
-      headers: {
-        authorization: "85c06b76-d1bb-40cc-b9fa-fda6b61002da"
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        // A exclusão foi bem-sucedida
-        console.log('Card deleted from server.');
-        this._element.remove(); // Remova o elemento do DOM
-      } else {
-        // A exclusão falhou
-        console.error('Failed to delete card from server.');
-      }
-    })
-    .catch(error => {
-      // Handle any errors that occur during the request
-      console.error('Error:', error);
-    });
+    api.addLikeToCard(this._id)
+      .then(data => {
+        this._likesCount = data.likes.length;
+        this._element.querySelector('.element__number').textContent = this._likesCount;
+      })
+      .catch((error) => {
+        console.error('Failed to add like to card:', error);
+      });
+  }
+
+  removeLike() {
+    api.removeLikeFromCard(this._id)
+      .then(data => {
+        this._likesCount = data.likes.length;
+        this._element.querySelector('.element__number').textContent = this._likesCount;
+      })
+      .catch((error) => {
+        console.error('Failed to remove like from card:', error);
+      });
   }
 }
-
-//preciso alterar a propriedade likes da api adicionando meus dados que estao na requisicao da linha 25 do index.js
-//com isso automaticamente sera adicionado e aumentara minha length
-//com essa logica tenho q tomar cuidado pq quando desclicar eu preciso fazer uma solicitacao delete para remover meus dados e alterar a length diminuindo.
-//eu coloquei meus dados numa variavel chamada myId onde seu conteudo obtive atraves de uma solicitação feita na api
-//porem essa variavel esta no arquivo index.js tenho q fazer sua importação aqui

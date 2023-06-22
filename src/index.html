@@ -70,12 +70,12 @@
     <button class="modal__button-close button-close button-close-photo"><img src="<%=require('./images/close-icon.png')%>" alt="Icone em formato de fechar com um simbolo de X"></button>
     <div class="modal__container">
       <h2 class="modal__title">Alterar a foto do perfil</h2>
-      <form class="modal__form modal__form_add" novalidate>
+      <form class="modal__form modal__form_add modal__form_editPhoto" novalidate>
         <div class="modal__input-separation">
-          <input type="url" id="url-input" class="modal__input modal__input_link" placeholder="URL da Imagem" required>
+          <input type="url" id="url-input" class="modal__input modal__input_link modal__input_save-photo" placeholder="URL da Imagem" required>
           <span class="url-input-error modal__input-error"></span>
         </div>
-        <button class="modal__button modal__button-create" type="submit">Salvar</button> 
+        <button class="modal__button modal__button-create modal__button_save" type="submit">Salvar</button> 
       </form>
     </div>
   </div>
@@ -91,9 +91,9 @@
 
     <section class="profile">
       <div class="profile__container">
-        <div class="profile__image_overlay">
+        <div class="profile__image-overlay">
           <img src="<%=require('./images/jacques-costeau.jpg')%>" alt="Foto JAcques Costeau" class="profile__image">
-          <img src="<%=require('./images/edit-photo-profile.png')%>" alt="Simbolo de editar a photo do profile" class="profile__edit_picture">
+          <img src="<%=require('./images/edit-photo-profile.png')%>" alt="Simbolo de editar a photo do profile" class="profile__edit-picture">
         </div>
        
         <div class="profile__info">

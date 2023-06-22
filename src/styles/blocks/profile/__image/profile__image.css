@@ -1,4 +1,4 @@
-.profile__image_overlay {
+.profile__image-overlay {
   position: relative;
 }
 
@@ -11,7 +11,7 @@
   transition: opacity 0.8s ease;
 }
 
-.profile__edit_picture {
+.profile__edit-picture {
   position: absolute;
   z-index: 2;
   left: 50%;
@@ -22,11 +22,11 @@
   transition: opacity 0.3s ease;
 }
 
-.profile__image_overlay:hover .profile__image {
+.profile__image-overlay:hover .profile__image {
   opacity: 0.5;
 }
 
-.profile__image_overlay:hover .profile__edit_picture {
+.profile__image-overlay:hover .profile__edit-picture {
   visibility: visible;
   opacity: 1;
 }
