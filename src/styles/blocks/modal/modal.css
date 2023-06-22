@@ -8,9 +8,9 @@
   left: 50%;
   /*faz com que o conteudo fique centralizado*/
   transform: translate(-50%, -50%);
-  display: flex; 
+  display: flex;
   flex-direction: column;
-  z-index: 2;  
+  z-index: 2;
   opacity: 0;
   transition: visibility 0.8s linear, opacity 0.5s linear; /*animacao quando abrir e fechar o modal*/
 }

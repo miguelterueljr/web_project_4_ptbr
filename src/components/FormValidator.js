@@ -10,58 +10,55 @@ export class FormValidator {
     };
   }
 
-  // Função que mostra elemento de erro
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this.form.querySelector(`.${inputElement.id}-error`); 
+    const errorElement = inputElement.nextElementSibling; // Encontra o elemento de erro próximo ao input
 
-    inputElement.classList.add('modal__input_type_error'); 
-
-    errorElement.textContent = errorMessage; 
-    errorElement.classList.add('modal__input-error_active'); 
+    inputElement.classList.add('modal__input_type_error');
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add('modal__input-error_active');
   }
 
-  // Função que oculda elemento de erro
   _hideInputError(inputElement) {
-    const errorElement = this.form.querySelector(`.${inputElement.id}-error`); 
+    const errorElement = inputElement.nextElementSibling;
 
-    inputElement.classList.remove('modal__input_type_error'); 
-
-    errorElement.classList.remove('modal__input-error_active'); 
-    errorElement.textContent = ''; 
+    inputElement.classList.remove('modal__input_type_error');
+    errorElement.classList.remove('modal__input-error_active');
+    errorElement.textContent = '';
   }
 
-  // Função verifica se o campo é valido
   _isValid(inputElement) {
-    if (!inputElement.validity.valid) { 
-      const errorMessage = Object.keys(this.errorMessages).find(errorKey => inputElement.validity[errorKey]);
-      this._showInputError(inputElement, errorMessage ? this.errorMessages[errorMessage] : 'Verifique os campos digitados.');
-    } else { 
-      this._hideInputError(inputElement); 
+    if (!inputElement.validity.valid) {
+      const errorMessage = Object.keys(this.errorMessages).find(
+        (errorKey) => inputElement.validity[errorKey]
+      );
+      this._showInputError(
+        inputElement,
+        errorMessage ? this.errorMessages[errorMessage] : 'Verifique os campos digitados.'
+      );
+    } else {
+      this._hideInputError(inputElement);
     }
   }
 
-  // Função para ativar o desativar meu botao dependendo da valdiacao do formulario
   _toggleButtonState() {
-    if(this._hasInvalidInput()) {
+    if (this._hasInvalidInput()) {
       this.buttonElement.classList.add('button__inactive');
+      this.buttonElement.disabled = true; // Desabilita o botão quando há campos inválidos
     } else {
       this.buttonElement.classList.remove('button__inactive');
+      this.buttonElement.disabled = false; // Habilita o botão quando todos os campos são válidos
     }
   }
 
-  // Função verifica se todos os inputs estão validos. retorna true se um campo for invalido
-  // me sinalizara se for true pra botao ficar invalido
   _hasInvalidInput() {
     return this.inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
-  };
+  }
 
-  // Método para adiconar escutados de eventos a todos os campos de input
   _setEventListeners() {
     this._toggleButtonState();
 
-    // Itera sobre array
     this.inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
@@ -70,16 +67,14 @@ export class FormValidator {
     });
   }
 
-  // Método para habilitar validação do formulário
   enableValidation() {
     this.form.addEventListener('submit', (evt) => {
-      evt.preventDefault()
+      evt.preventDefault();
     });
 
     this._setEventListeners();
   }
 
-  //método que faz o formulario resetar sua validação
   resetValidation() {
     this.inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
@@ -87,5 +82,3 @@ export class FormValidator {
     this._toggleButtonState();
   }
 }
-
-

@@ -191,7 +191,7 @@ formList.forEach((form) => {
 });
 
 //abrir modal para editar photo do perfil
-const showModalEditPhoto = document.querySelector('.profile__image_overlay')
+const showModalEditPhoto = document.querySelector('.profile__image-overlay')
 const showModalEdit = document.querySelector('.modal_photo');
 showModalEditPhoto.addEventListener('click', () => {const showModalEdit = document.querySelector('.modal_photo');
   showModalEdit.classList.add('modal-photo')
