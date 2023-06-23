@@ -18,16 +18,12 @@ export class Popup {
   //fecha modal qnd aperto esc
   _handleEscClose () {
     this.close()
-    
     page.classList.remove('page_opacity');
-    
   }
 
   //fecha o modal quando clicar fora dele
   setEventListeners () {
     this.close();
     page.classList.remove('page_opacity');
-    
   }
-
 }

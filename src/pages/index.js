@@ -1,17 +1,25 @@
 import "./index.css";
 import { Card } from "../components/Card";
 import { togglePageOpacity } from "../utils/utils.js";
-import { handleProfileFormSubmit } from "../components/UserInfo";
+import { UserInfo, handleProfileFormSubmit } from "../components/UserInfo";
 import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage";
-import { initializePage } from "../components/UserInfo";
 import { Api } from "../components/Api.js";
+import { myUserId } from "../utils/utils.js";
 
+const user = new UserInfo();
 // Chama a função de inicialização da página quando a página for carregada, responsável por carregar os dados do profile do servidor
 window.addEventListener("DOMContentLoaded", () => {
-  initializePage();
+  api.getProfile()
+  .then(data => { 
+    const { name, about, avatar } = data; 
+    user.setUserInfo(name, about, avatar);
+  }) 
+  .catch(error => { 
+    console.error("Erro ao carregar as informações do perfil:", error); 
+  });
 });
 
 const api = new Api(); 
@@ -23,7 +31,7 @@ api.fetchInitialCards()
     initialCards.push(...res);
 
     res.forEach((item) => {
-      if (item.owner._id === "436e74c115dfe006750ac205") {
+      if (item.owner._id === myUserId) {
         //coloquei tempo para atrasar a execucao da funcao, senao o card nao é renderizado no momento da execucao dessa funcao e da erro.
         setTimeout(() => showDeleteButton(), 100);
       }
@@ -33,11 +41,11 @@ api.fetchInitialCards()
 
 console.log(initialCards)
 
-function showDeleteButton() {
+export function showDeleteButton() {
   const deleteButton = document.querySelectorAll('.element__delete')
   deleteButton.forEach((item) => {
     const cardId = item.dataset.cardId;
-    if (cardId === "436e74c115dfe006750ac205") {
+    if (cardId === myUserId) {
       item.classList.add('element__delete_active')
     }
   })
@@ -102,7 +110,7 @@ modalFormAdd.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const imageName = document.querySelector('.modal__input_title');
   const imageLink = document.querySelector('.modal__input_link');
-  const ownerId = "436e74c115dfe006750ac205"; // ID do usuário atual, substitua pelo valor correto recuperado da API
+  const ownerId = myUserId; // ID do usuário atual, substitua pelo valor correto recuperado da API
   const card = new Card(imageLink.value, imageName.value, { _id: ownerId });
   card.addCardToServer();
   const cardElement = card.generateCard();
@@ -217,3 +225,16 @@ buttonSavephoto.addEventListener('click', () => {
   page.classList.remove('page_opacity');
   modal__form_editPhoto.reset();
 })
+
+//faz update do profile
+export function updateProfile (data) {
+  api.updateProfile(data)
+  .then(updatedResult => { 
+    console.log("Dados de perfil atualizados:", updatedResult); 
+    user.setUserInfo(updatedResult.name, updatedResult.about, updatedResult.avatar);
+  }) 
+
+  .catch(error => { 
+    console.error("Erro ao atualizar o perfil:", error); 
+  }); 
+}

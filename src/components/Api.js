@@ -1,7 +1,9 @@
+import { authorizationCode, urlApi } from "../utils/utils";
+
 export class Api {
   constructor() {
-    this.authorization = "85c06b76-d1bb-40cc-b9fa-fda6b61002da";
-    this.baseUrl = "https://around.nomoreparties.co/v1/web_ptbr_04";
+    this.authorization = authorizationCode;
+    this.baseUrl = urlApi;
   }
 
   fetchInitialCards() {
@@ -11,9 +13,6 @@ export class Api {
       }
     })
       .then(res => res.json())
-      .then((res) => {
-        return res;
-      })
       .catch((error) => {
         console.error("Erro ao buscar os cards iniciais:", error);
         return [];
@@ -112,5 +111,38 @@ export class Api {
       });
   }
 
-  
+  addLikeToCard(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: {
+        authorization: this.authorization
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      })
+      .catch(error => {
+        console.error("Erro ao adicionar curtida ao card:", error);
+        throw error;
+      });
+  }
+
+  removeLikeFromCard(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: this.authorization
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      })
+      .catch(error => {
+        console.error("Erro ao remover curtida do card:", error);
+        throw error;
+      });
+  }
+ 
 }

@@ -1,5 +1,6 @@
 import { Api } from "./Api";
 import { PopupWithImage } from "./PopupWithImage";
+import { showDeleteButton } from "../pages";
 
 const api = new Api();
 const modalImage = document.querySelector('.modal-image');
@@ -107,6 +108,11 @@ export class Card {
     api.addCard(cardData)
       .then((createdCard) => {
         console.log('Card added to server:', createdCard);
+        // Atualiza os dados do card com os dados retornados do servidor
+        this._id = createdCard.id;
+        this._likesCount = createdCard.likes.length;
+        this._element.querySelector('.element__number').textContent = this._likesCount;
+        showDeleteButton();
       })
       .catch((error) => {
         console.error('Failed to add card to server:', error);
@@ -135,21 +141,25 @@ export class Card {
     api.addLikeToCard(this._id)
       .then(data => {
         this._likesCount = data.likes.length;
-        this._element.querySelector('.element__number').textContent = this._likesCount;
+        this._updateLikesCount();
       })
       .catch((error) => {
         console.error('Failed to add like to card:', error);
       });
   }
-
+  
   removeLike() {
     api.removeLikeFromCard(this._id)
       .then(data => {
         this._likesCount = data.likes.length;
-        this._element.querySelector('.element__number').textContent = this._likesCount;
+        this._updateLikesCount();
       })
       .catch((error) => {
         console.error('Failed to remove like from card:', error);
       });
+  }
+  
+  _updateLikesCount() {
+    this._element.querySelector('.element__number').textContent = this._likesCount;
   }
 }
