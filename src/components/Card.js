@@ -1,6 +1,6 @@
 import { Api } from "./Api";
 import { PopupWithImage } from "./PopupWithImage";
-import { showDeleteButton } from "../pages";
+import { addCard, deleteCard, like, dislike } from "../pages/index.js";
 
 const api = new Api();
 const modalImage = document.querySelector('.modal-image');
@@ -105,61 +105,28 @@ export class Card {
       link: this._imageLink
     };
   
-    api.addCard(cardData)
-      .then((createdCard) => {
-        console.log('Card added to server:', createdCard);
-        // Atualiza os dados do card com os dados retornados do servidor
-        this._id = createdCard.id;
-        this._likesCount = createdCard.likes.length;
-        this._element.querySelector('.element__number').textContent = this._likesCount;
-        showDeleteButton();
-      })
-      .catch((error) => {
-        console.error('Failed to add card to server:', error);
-      });
+    addCard(cardData)
   }
 
   deleteCardFromServer() {
     const cardId = this._element.querySelector('.element__delete').dataset.idCard;
-  
-    api.deleteCard(cardId)
-      .then(response => {
-        if (response.ok) {
-          console.log('Card deleted from server.');
-          this._element.remove();
-        } else {
-          console.error('Failed to delete card from server:', response.status, response.statusText);
-        }
-        confirmButton.removeEventListener('click', this._handleDelete);
-      })
-      .catch((error) => {
-        console.error('Failed to delete card from server:', error);
-      });
+    deleteCard(cardId);
   }
 
   addLike() {
-    api.addLikeToCard(this._id)
-      .then(data => {
-        this._likesCount = data.likes.length;
-        this._updateLikesCount();
-      })
-      .catch((error) => {
-        console.error('Failed to add like to card:', error);
-      });
+    like(this._id);
+    this._likesCount++;
+    this._updateLikesCount();
   }
-  
+
   removeLike() {
-    api.removeLikeFromCard(this._id)
-      .then(data => {
-        this._likesCount = data.likes.length;
-        this._updateLikesCount();
-      })
-      .catch((error) => {
-        console.error('Failed to remove like from card:', error);
-      });
+    dislike(this._id);
+    this._likesCount--;
+    this._updateLikesCount();
   }
   
   _updateLikesCount() {
-    this._element.querySelector('.element__number').textContent = this._likesCount;
+    const likesCountElement = this._element.querySelector('.element__number');
+    likesCountElement.textContent = this._likesCount;
   }
 }

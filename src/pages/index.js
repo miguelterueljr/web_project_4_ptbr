@@ -237,4 +237,64 @@ export function updateProfile (data) {
   .catch(error => { 
     console.error("Erro ao atualizar o perfil:", error); 
   }); 
+}const card = new Card();
+
+export function addCard (cardData) {
+  api.addCard(cardData)
+      .then((createdCard) => {
+        console.log('Card added to server:', createdCard);
+        // Atualiza os dados do card com os dados retornados do servidor
+        card._id = createdCard.id;
+        card._likesCount = createdCard.likes.length;
+        card._element.querySelector('.element__number').textContent = card._likesCount;
+        showDeleteButton();
+      })
+      .catch((error) => {
+        console.error('Failed to add card to server:', error);
+      });
 }
+
+export function deleteCard (cardId) {
+  api.deleteCard(cardId)
+      .then(response => {
+        if (response.ok) {
+          console.log('Card deleted from server.');
+          card._element.remove();
+        } else {
+          console.error('Failed to delete card from server:', response.status, response.statusText);
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to delete card from server:', error);
+      });
+}
+
+export function like(id) {
+  api.addLikeToCard(id)
+    .then(data => {
+      console.log('testando');
+      card._likesCount = data.likes.length;
+      card._updateLikesCount();
+      console.log(card._likesCount);
+    })
+    .catch((error) => {
+      console.error('Falha ao curtir card: ', error);
+    });
+}
+
+
+export function dislike(id) {
+  api.removeLikeFromCard(id)
+    .then(data => {
+      card._likesCount = data.likes.length;
+      card._updateLikesCount();
+      console.log(card._likesCount);
+    })
+    .catch((error) => {
+      console.error('Failed to remove like from card:', error);
+    });
+}
+
+
+
+
