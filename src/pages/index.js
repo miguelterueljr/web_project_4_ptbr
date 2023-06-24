@@ -93,6 +93,7 @@ const cardList = new Section(
       const card = new Card(item.link, item.name, item.owner, item._id, item.likes.length);
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
+      
     }
   },
   '.elements'
@@ -105,16 +106,22 @@ modalFormAdd.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const imageName = document.querySelector('.modal__input_title');
   const imageLink = document.querySelector('.modal__input_link');
-  const ownerId = myUserId; // ID do usuário atual, substitua pelo valor correto recuperado da API
   const card = new Card(imageLink.value, imageName.value, { _id: myUserId });
   card.addCardToServer();
-  const cardElement = card.generateCard();
+  
+});
+//colocar minha logica de adicionar card ao DOM aqui dentro, o x é o objeto da imagem
+function funcaoTeste (x) {
+  console.log(x)
+  const cardElement = x.generateCard();
+  
   document.querySelector('.elements').prepend(cardElement);
   openModalAdd.close();
   togglePageOpacity(page);
   formAddImage.reset();
-});
-
+  console.log(card)
+  card.updateLikesCount(0);
+}
 document.addEventListener('keydown', (evt) => {
   if (evt.key === "Escape") {
     openModal._handleEscClose();
@@ -229,22 +236,26 @@ export function updateProfile (data) {
   .catch(error => { 
     console.error("Erro ao atualizar o perfil:", error); 
   }); 
-}const card = new Card();
-
+}
+const card = new Card();
+let cardRetornadoDoServidor
 export function addCard (cardData) {
-  api.addCard(cardData)
+  return api.addCard(cardData)
       .then((createdCard) => {
         console.log('Card added to server:', createdCard);
         // Atualiza os dados do card com os dados retornados do servidor
-        card._id = createdCard.id;
-        card._likesCount = createdCard.likes.length;
-        card._element.querySelector('.element__number').textContent = card._likesCount;
-        showDeleteButton();
+      card._id = createdCard.id;
+      card.updateLikesCount(createdCard.likes.length); // Atualiza o número de likes
+      showDeleteButton();
+      cardRetornadoDoServidor = createdCard;
+      funcaoTeste(cardRetornadoDoServidor)
       })
       .catch((error) => {
         console.error('Failed to add card to server:', error);
       });
 }
+
+
 
 export function deleteCard (cardId) {
   api.deleteCard(cardId)
@@ -261,8 +272,8 @@ export function deleteCard (cardId) {
       });
 }
 
-export function like(id) {
-  api.addLikeToCard(id)
+export function like(card) {
+  api.addLikeToCard(card._id)
     .then(data => {
       card._likesCount = data.likes.length;
       card._updateLikesCount();
@@ -273,12 +284,11 @@ export function like(id) {
 }
 
 
-export function dislike(id) {
-  api.removeLikeFromCard(id)
+export function dislike(card) {
+  api.removeLikeFromCard(card._id)
     .then(data => {
       card._likesCount = data.likes.length;
       card._updateLikesCount();
-      console.log(card._likesCount);
     })
     .catch((error) => {
       console.error('Failed to remove like from card:', error);

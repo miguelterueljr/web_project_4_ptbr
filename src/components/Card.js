@@ -50,9 +50,9 @@ export class Card {
       evt.target.classList.toggle('element__button_active');
 
       if (evt.target.classList.contains('element__button_active')) {
-        this.addLike();
+        like(this);
       } else {
-        this.removeLike();
+        dislike(this);
       }
     });
 
@@ -126,5 +126,10 @@ export class Card {
   _updateLikesCount() {
     const likesCountElement = this._element.querySelector('.element__number');
     likesCountElement.textContent = this._likesCount;
+  }
+
+  updateLikesCount(likesCount) {
+    this._likesCount = likesCount;
+    this._element.querySelector('.element__number').textContent = likesCount.toString();
   }
 }
