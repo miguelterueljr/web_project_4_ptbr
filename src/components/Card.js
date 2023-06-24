@@ -1,8 +1,6 @@
-import { Api } from "./Api";
 import { PopupWithImage } from "./PopupWithImage";
 import { addCard, deleteCard, like, dislike } from "../pages/index.js";
 
-const api = new Api();
 const modalImage = document.querySelector('.modal-image');
 const modalImgElement = document.querySelector('.modal-image__image');
 const btnClose = document.querySelector('.modal-image__button');

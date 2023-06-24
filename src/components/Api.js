@@ -31,9 +31,6 @@ export class Api {
       })
     })
       .then(res => res.json())
-      .then((updatedResult) => {
-        return updatedResult.avatar;
-      })
       .catch((error) => {
         console.error("Erro ao atualizar o avatar:", error);
         throw error;
@@ -50,9 +47,6 @@ export class Api {
       body: JSON.stringify(data)
     })
       .then(res => res.json())
-      .then((updatedResult) => {
-        return updatedResult;
-      })
       .catch((error) => {
         console.error("Erro ao atualizar o perfil:", error);
         throw error;

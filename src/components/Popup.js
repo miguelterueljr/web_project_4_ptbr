@@ -1,4 +1,4 @@
-import { page } from "../pages";
+import { page } from "../utils/utils.js";
 
 //classe responsavel para fazer abrir os modais
 export class Popup {

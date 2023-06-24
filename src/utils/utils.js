@@ -17,3 +17,5 @@ export function togglePageOpacity (page) {
 export const authorizationCode = "85c06b76-d1bb-40cc-b9fa-fda6b61002da";
 export const urlApi = "https://around.nomoreparties.co/v1/web_ptbr_04";
 export const myUserId = "436e74c115dfe006750ac205";
+
+export const page = document.querySelector('.page');

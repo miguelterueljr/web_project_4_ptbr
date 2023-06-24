@@ -7,7 +7,7 @@ import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage";
 import { Api } from "../components/Api.js";
-import { myUserId } from "../utils/utils.js";
+import { myUserId, page } from "../utils/utils.js";
 
 const user = new UserInfo();
 // Chama a função de inicialização da página quando a página for carregada, responsável por carregar os dados do profile do servidor
@@ -39,8 +39,6 @@ api.fetchInitialCards()
     cardList.render();
   });
 
-console.log(initialCards)
-
 export function showDeleteButton() {
   const deleteButton = document.querySelectorAll('.element__delete')
   deleteButton.forEach((item) => {
@@ -53,12 +51,9 @@ export function showDeleteButton() {
 
 const editButton = document.querySelector('.button-edit');
 const closeButton = document.querySelector('.modal__button-close');
-export const page = document.querySelector('.page');
 const openModal = new PopupWithForm('.modal', handleProfileFormSubmit);
 const openModalAdd = new PopupWithForm('.modal-add', handleProfileFormSubmit);
 const openModalImage = new PopupWithImage('.modal-image');
-const modalDelete = document.querySelector('.modal_delete')
-
 
 editButton.addEventListener('click', () => {
   togglePageOpacity(page);
@@ -111,7 +106,7 @@ modalFormAdd.addEventListener('submit', (evt) => {
   const imageName = document.querySelector('.modal__input_title');
   const imageLink = document.querySelector('.modal__input_link');
   const ownerId = myUserId; // ID do usuário atual, substitua pelo valor correto recuperado da API
-  const card = new Card(imageLink.value, imageName.value, { _id: ownerId });
+  const card = new Card(imageLink.value, imageName.value, { _id: myUserId });
   card.addCardToServer();
   const cardElement = card.generateCard();
   document.querySelector('.elements').prepend(cardElement);
@@ -163,14 +158,11 @@ const removeEventListeners = () => {
 
   modalFormAdd.removeEventListener('submit', (evt) => {
     evt.preventDefault();
-    const imageName = document.querySelector('.modal__input_title');
-    const imageLink = document.querySelector('.modal__input_link');
     const card = new Card(imageLink.value, imageName.value);
     const cardElement = card.generateCard();
     document.querySelector('.elements').prepend(cardElement);
     openModalAdd.close();
     togglePageOpacity(page);
-    formAddImage.reset();
   });
 
   document.removeEventListener('keydown', (evt) => {
@@ -272,10 +264,8 @@ export function deleteCard (cardId) {
 export function like(id) {
   api.addLikeToCard(id)
     .then(data => {
-      console.log('testando');
       card._likesCount = data.likes.length;
       card._updateLikesCount();
-      console.log(card._likesCount);
     })
     .catch((error) => {
       console.error('Falha ao curtir card: ', error);
